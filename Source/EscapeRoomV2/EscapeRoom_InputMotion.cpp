@@ -47,7 +47,7 @@ void AEscapeRoom_InputMotion::MoveMesh() const
 	{
 		FVector _tilt;
 		FVector _rotation;
-		FVector _gravity;
+		FVector _gravity; 
 		FVector _acceleration;
 
 		PlayerControllerRef->GetInputMotionState(_tilt, _rotation, _gravity, _acceleration);
