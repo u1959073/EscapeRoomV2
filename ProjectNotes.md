@@ -36,7 +36,7 @@
 
 1. Encendre la llum general:  
     - La llum està apagada, tens una eina "llanterna" al mobil, si l'encens i t'apropes molt als objectes, pots intuïr què son, però no interactuar amb ells ( excepte el botó d'encendre la llum). 
-    - Quan trobes l'objecte encarregat, el podràs clicar des de la pantalla del mobil i encendre la llum general que et permetrà veure bé tots els objectes. ( això ja ens pot donar un número)
+    - Quan trobes l'objecte encarregat, el podràs clicar des de la pantalla del mobil i encendre la llum general que et permetrà veure bé tots els objectes. ( això ja ens pot donar un número). Aquesta llum s'apagarà cada X segons i caldrà tornar a encendre-la manualment, en un punt de partida estaria bé poder posar un objecte pesant sobre del botó i que quedi permanentment encès ( per jugar amb timers de Unreal engine ).
 
 2. LLum ultravioleta: 
     Algun objecte amaga alguna cosa.. sembla que una llum ultraviuleta revelaria el que amaga.

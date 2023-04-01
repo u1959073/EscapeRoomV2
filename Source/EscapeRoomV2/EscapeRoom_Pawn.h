@@ -29,23 +29,17 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	void ToggleFlashLight();
+
 private: 
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* Camera;
 
-	UPROPERTY(EditDefaultsOnly, Category = "BP_Class")
-	TSubclassOf<class UGoogleARCoreAugmentedImage> AugmentedImageClass;
 
-	UPROPERTY(EditDefaultsOnly, Category = "BP_Class")
-	TSubclassOf<class AEscapeRoom_Spawner> SpawnerClass;
+	UPROPERTY(VisibleAnywhere, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	class USpotLightComponent* SpotFlashlight;
 
-
-	UPROPERTY(EditDefaultsOnly, Category = "BP_Class")
-	TSubclassOf<class UARTrackedImage> TrackedImageClass;
-
-	UPROPERTY(VisibleAnywhere, Category = "Variables")
-	TMap<class UARCandidateImage*, class AEscapeRoom_Spawner*> SpawnedImages;
 
 	APlayerController* PlayerControllerRef;
 

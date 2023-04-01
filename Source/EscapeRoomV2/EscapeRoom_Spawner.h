@@ -31,11 +31,8 @@ public:
 private:
 
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	UChildActorComponent* ChildActor;
-
-	// UPROPERTY(EditDefaultsOnly, Category = "BP_Class")
-	// UClass* provaClasse;
 
 
 	UPROPERTY(EditAnywhere, Category = "Variables")
