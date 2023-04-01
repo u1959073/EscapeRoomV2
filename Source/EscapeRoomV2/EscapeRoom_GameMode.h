@@ -22,6 +22,7 @@ public:
 	// Called every frame
 
 	AEscapeRoom_GameMode();
+
 	virtual void Tick(float DeltaTime) override;
 
 private: 

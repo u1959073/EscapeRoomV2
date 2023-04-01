@@ -58,7 +58,14 @@
     
 
     
-
+TODO 20240401:
+- Passar tota la lògica actual de fer spawn d'actors a una nova classe c++ AREscapeRoom_GameMode que serà qui ha de gestionar "l'estat" del nivell -> DONE
+- Definir una funció a AREscapeRoom_Pawn per encendre/apagar el flaix. -> IN PROGRESS
+- Fer un botó a la pantalla amb un widget per encendre/apagar el flaix.
+- fer un widget translucid que ocupi tota la pantalla i la faci "fosca". 
+- fer la lògica de la detecció de clic de botó virtual
+- llançar un event per desactivar el widget de "llum apagada" ( mirar udemy ) gestió d'events 
+- Pensar com gestionar els nivells des del game mode ( tenir 2 spawners, un d'inventari l'altre de nivells i activar els nivells amb un tag..? Tenir un spawner per nivell amb els actors corresponents? Tenir un spawner i modificar els candidates..?? Etc.), començar per activar només el botó d'encendre la llum
 
 
 
