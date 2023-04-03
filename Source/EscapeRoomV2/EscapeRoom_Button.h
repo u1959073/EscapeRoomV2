@@ -23,6 +23,10 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION(BlueprintCallable, Category = "Events")
+	void HandleInputTouch();
+
+
 private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
@@ -32,7 +36,8 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	USceneComponent* Scene;
 
-
+	UPROPERTY(EditDefaultsOnly, Category = "BP_Class")
+	TSubclassOf<class AActor> ButtonClass;
 
 
 

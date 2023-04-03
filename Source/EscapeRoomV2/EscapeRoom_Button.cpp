@@ -17,6 +17,41 @@ AEscapeRoom_Button::AEscapeRoom_Button()
 
 }
 
+
+void AEscapeRoom_Button::HandleInputTouch() 
+{
+	TArray<AActor*> Actors;
+	GetOverlappingActors(
+		Actors
+	);
+
+	if(Actors.Num() == 0)
+	{
+			GEngine->AddOnScreenDebugMessage(
+				-1, 
+				3.f, 
+				FColor::Purple, 
+				FString::Printf(TEXT("No s'ha trobat cap overlap"))
+			);
+	}
+	else{
+
+		for(AActor* Actor : Actors)
+		{
+			FString ActorName = Actor->GetActorNameOrLabel();
+			GEngine->AddOnScreenDebugMessage(
+				-1, 
+				3.f, 
+				FColor::Purple, 
+				FString::Printf(TEXT("OverlapingActorName: %s"), *ActorName)
+			);
+	}
+	}
+}
+
+
+
+
 // Called when the game starts or when spawned
 void AEscapeRoom_Button::BeginPlay()
 {
@@ -28,6 +63,34 @@ void AEscapeRoom_Button::BeginPlay()
 void AEscapeRoom_Button::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	TArray<AActor*> Actors;
+	GetOverlappingActors(
+		Actors
+	);
+
+	if(Actors.Num() == 0)
+	{
+			GEngine->AddOnScreenDebugMessage(
+				-1, 
+				GWorld->DeltaTimeSeconds, 
+				FColor::Green, 
+				FString::Printf(TEXT("No s'ha trobat cap overlap"))
+			);
+	}
+	else{
+
+		for(AActor* Actor : Actors)
+		{
+			FString ActorName = Actor->GetActorNameOrLabel();
+			GEngine->AddOnScreenDebugMessage(
+				-1, 
+				GWorld->DeltaTimeSeconds, 
+				FColor::Green, 
+				FString::Printf(TEXT("OverlapingActorName: %s"), *ActorName)
+			);
+	}
+	}
 
 }
 

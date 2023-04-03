@@ -13,7 +13,7 @@
 #include "Math/TransformNonVectorized.h"
 #include "Components/SpotLightComponent.h"
 #include "Components/InputComponent.h"
-#include "Components/BoxComponent.h"
+#include "Components/CapsuleComponent.h"
 
 // Sets default values
 AEscapeRoom_Pawn::AEscapeRoom_Pawn()
@@ -29,8 +29,8 @@ AEscapeRoom_Pawn::AEscapeRoom_Pawn()
 	SpotFlashlight = CreateDefaultSubobject<USpotLightComponent>(TEXT("SpotFlashlight"));
     SpotFlashlight->SetupAttachment(Camera);
 
-	FlishlightBoxComponent = CreateDefaultSubobject<UBoxComponent>(TEXT("FlishlightBoxComponent"));
-	FlishlightBoxComponent->SetupAttachment(SpotFlashlight);
+	FlishlightCollisionComponent = CreateDefaultSubobject<UCapsuleComponent>(TEXT("FlishlightCollisionComponent"));
+	FlishlightCollisionComponent->SetupAttachment(SpotFlashlight);
 
 
     // Set default properties for the light
@@ -38,7 +38,7 @@ AEscapeRoom_Pawn::AEscapeRoom_Pawn()
     SpotFlashlight->SetLightColor(FLinearColor::White);
     SpotFlashlight->SetInnerConeAngle(20.0f);
     SpotFlashlight->SetOuterConeAngle(45.0f);
-	SpotFlashlight->SetAttenuationRadius(2000.0f);
+	SpotFlashlight->SetAttenuationRadius(500.0f);
 
 }
 
@@ -49,15 +49,6 @@ void AEscapeRoom_Pawn::ToggleFlashLight()
 	GEngine->AddOnScreenDebugMessage(-1, GWorld->DeltaTimeSeconds, FColor::Green, TEXT("ToggleFlashLight"));
 
 	SpotFlashlight->ToggleVisibility();
-
-	// if(SpotFlashlight->Intensity > 0.f)
-	// {
-    // 	SpotFlashlight->SetIntensity(0.f); // TODO: vigilar si afecta al rendiment, potser seria convenient crear i destruir el flaix cada cop.. ( per si el joc segueix calculant hombres i llum tot i estar la intensitat a 0)
-	// }
-	// else 
-	// {
-    // 	SpotFlashlight->SetIntensity(2000.0f); // TODO: vigilar si afecta al rendiment, potser seria convenient crear i destruir el flaix cada cop.. ( per si el joc segueix calculant hombres i llum tot i estar la intensitat a 0)
-	// }
 
 }
 

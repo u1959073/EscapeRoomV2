@@ -41,7 +41,11 @@ private:
 	class USpotLightComponent* SpotFlashlight;
 
 	UPROPERTY(VisibleAnywhere, Category = "Components", meta = (AllowPrivateAccess = "true"))
-	class UBoxComponent* FlishlightBoxComponent;
+	class UCapsuleComponent* FlishlightCollisionComponent;
+
+	UPROPERTY(EditDefaultsOnly, Category = "BP_Class")
+	TSubclassOf<class AActor> ButtonClass;
+
 
 	APlayerController* PlayerControllerRef;
 
