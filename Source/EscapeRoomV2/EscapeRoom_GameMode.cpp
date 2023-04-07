@@ -29,6 +29,7 @@ void AEscapeRoom_GameMode::BeginPlay()
     Super::BeginPlay();
     UARBlueprintLibrary::StartARSession(EscapeRoom_SessionConfig);
     UKismetSystemLibrary::ControlScreensaver(false);
+
 }
 
 // Called every frame
@@ -40,6 +41,22 @@ void AEscapeRoom_GameMode::Tick(float DeltaTime)
 	GEngine->AddOnScreenDebugMessage(-1, GWorld->DeltaTimeSeconds, FColor::Green, TEXT("This is parent"));
 	
 	TArray<UARTrackedImage*> TrackedImages = UARBlueprintLibrary::GetAllGeometriesByClass<UARTrackedImage>();
+
+	// for (UARTrackedImage* i: AuxTrackedImages )
+	// {
+	// 	if(!TrackedImages.Contains(i))
+	// 	{
+	// 		int position = AuxTrackedImages.Find(i);
+	// 		UARTrackedImage* image = AuxTrackedImages[position];
+			
+	// 		// AEscapeRoom_Spawner**  = SpawnedImages.Find(DetectedImage);
+
+	// 		AEscapeRoom_Spawner** aux_actor = SpawnedImages.Find(image->GetDetectedImage());
+
+	// 		(*aux_actor)->SetSpawnActorVisibility(image->GetDetectedImage(),false);
+
+	// 	}
+	// }
 
 	for (UARTrackedImage* i : TrackedImages) {
 

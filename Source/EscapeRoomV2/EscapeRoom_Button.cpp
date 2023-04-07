@@ -2,12 +2,15 @@
 
 
 #include "EscapeRoom_Button.h"
+#include "Kismet/GameplayStatics.h"
+#include "EscapeRoom_GameMode.h"
 
 // Sets default values
 AEscapeRoom_Button::AEscapeRoom_Button()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	
 
 	Scene = CreateDefaultSubobject<USceneComponent>(TEXT("Scene"));
 	RootComponent = Scene;
@@ -15,38 +18,30 @@ AEscapeRoom_Button::AEscapeRoom_Button()
 	ButtonMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Button Mesh"));
 	ButtonMesh->SetupAttachment(Scene);
 
+
 }
 
 
-void AEscapeRoom_Button::HandleInputTouch() 
+void AEscapeRoom_Button::HandleInputTouch(UStaticMeshComponent *t) 
 {
 	TArray<AActor*> Actors;
 	GetOverlappingActors(
 		Actors
 	);
 
-	if(Actors.Num() == 0)
-	{
-			GEngine->AddOnScreenDebugMessage(
-				-1, 
-				3.f, 
-				FColor::Purple, 
-				FString::Printf(TEXT("No s'ha trobat cap overlap"))
-			);
-	}
-	else{
-
 		for(AActor* Actor : Actors)
 		{
 			FString ActorName = Actor->GetActorNameOrLabel();
-			GEngine->AddOnScreenDebugMessage(
-				-1, 
-				3.f, 
-				FColor::Purple, 
-				FString::Printf(TEXT("OverlapingActorName: %s"), *ActorName)
-			);
-	}
-	}
+			GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Purple, FString::Printf(TEXT("OverlapingActorName: %s"), *ActorName));
+			if(t->ComponentHasTag("pressable") && (t == ButtonMesh))
+			{
+				AEscapeRoom_GameMode *GameMode = Cast<AEscapeRoom_GameMode>(UGameplayStatics::GetGameMode(this));
+				if(GameMode != nullptr)
+				{
+					GameMode->ToggleGlobalLight();
+				}			
+			}
+		}
 }
 
 
@@ -56,8 +51,22 @@ void AEscapeRoom_Button::HandleInputTouch()
 void AEscapeRoom_Button::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	// ButtonMesh->OnInputTouchEnd.AddDynamic(this, &AEscapeRoom_Button::ButtonPressed); // no se perquè no funciona
+
 }
+
+
+// void AEscapeRoom_Button::ButtonPressed(ETouchIndex::Type FingerIndex, UPrimitiveComponent* TouchedComponent)
+// {
+// 	GEngine->AddOnScreenDebugMessage(
+// 		-1, 
+// 		3.f, 
+// 		FColor::Purple, 
+// 		FString::Printf(TEXT("PATATA"))
+// 	);
+
+// }
+
 
 // Called every frame
 void AEscapeRoom_Button::Tick(float DeltaTime)

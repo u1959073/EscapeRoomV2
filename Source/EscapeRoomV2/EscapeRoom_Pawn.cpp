@@ -14,6 +14,7 @@
 #include "Components/SpotLightComponent.h"
 #include "Components/InputComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "PhysicsEngine/ConstraintInstance.h"
 
 // Sets default values
 AEscapeRoom_Pawn::AEscapeRoom_Pawn()
@@ -24,17 +25,18 @@ AEscapeRoom_Pawn::AEscapeRoom_Pawn()
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	Camera->SetupAttachment(RootComponent);
 
-
-
 	SpotFlashlight = CreateDefaultSubobject<USpotLightComponent>(TEXT("SpotFlashlight"));
     SpotFlashlight->SetupAttachment(Camera);
 
-	FlishlightCollisionComponent = CreateDefaultSubobject<UCapsuleComponent>(TEXT("FlishlightCollisionComponent"));
-	FlishlightCollisionComponent->SetupAttachment(SpotFlashlight);
+	FlashlightCollisionComponent = CreateDefaultSubobject<UCapsuleComponent>(TEXT("FlashlightCollisionComponent"));
+	FlashlightCollisionComponent->SetupAttachment(SpotFlashlight);
 
+	FlashlightCollisionComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
     // Set default properties for the light
-    SpotFlashlight->SetIntensity(2000.0f);
+    SpotFlashlight->SetIntensity(10000.0f);
+    SpotFlashlight->SetVisibility(false);
+
     SpotFlashlight->SetLightColor(FLinearColor::White);
     SpotFlashlight->SetInnerConeAngle(20.0f);
     SpotFlashlight->SetOuterConeAngle(45.0f);
@@ -49,6 +51,14 @@ void AEscapeRoom_Pawn::ToggleFlashLight()
 	GEngine->AddOnScreenDebugMessage(-1, GWorld->DeltaTimeSeconds, FColor::Green, TEXT("ToggleFlashLight"));
 
 	SpotFlashlight->ToggleVisibility();
+
+	if(SpotFlashlight->GetVisibleFlag())
+	{
+		FlashlightCollisionComponent->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	}
+	else {
+		FlashlightCollisionComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	}
 
 }
 

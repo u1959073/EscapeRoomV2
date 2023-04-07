@@ -24,7 +24,10 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintCallable, Category = "Events")
-	void HandleInputTouch();
+	void HandleInputTouch(UStaticMeshComponent* ButtonMesh);
+
+private:
+	// void ButtonPressed(ETouchIndex::Type FingerIndex, UPrimitiveComponent* TouchedComponent);
 
 
 private:

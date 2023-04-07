@@ -18,10 +18,15 @@ protected:
 
 	virtual void BeginPlay() override;
 
+
 public:	
 	// Called every frame
 
 	AEscapeRoom_GameMode();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void ToggleGlobalLight();
+
 
 	virtual void Tick(float DeltaTime) override;
 
@@ -40,9 +45,12 @@ private:
 	TSubclassOf<class UARTrackedImage> TrackedImageClass;
 
 	UPROPERTY(VisibleAnywhere, Category = "Variables")
+	
 	TMap<class UARCandidateImage*, class AEscapeRoom_Spawner*> SpawnedImages;
+	// TMap<class UARCandidateImage*, class AEscapeRoom_Spawner*> SpawnedImages;
 
-	APlayerController* PlayerControllerRef;
+	TArray<class UARTrackedImage*> AuxTrackedImages;
+	// APlayerController* PlayerControllerRef;	
 
 
 	

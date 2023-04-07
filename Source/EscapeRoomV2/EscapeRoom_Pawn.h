@@ -41,7 +41,7 @@ private:
 	class USpotLightComponent* SpotFlashlight;
 
 	UPROPERTY(VisibleAnywhere, Category = "Components", meta = (AllowPrivateAccess = "true"))
-	class UCapsuleComponent* FlishlightCollisionComponent;
+	class UCapsuleComponent* FlashlightCollisionComponent;
 
 	UPROPERTY(EditDefaultsOnly, Category = "BP_Class")
 	TSubclassOf<class AActor> ButtonClass;
