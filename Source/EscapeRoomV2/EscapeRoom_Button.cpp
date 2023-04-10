@@ -25,9 +25,18 @@ AEscapeRoom_Button::AEscapeRoom_Button()
 void AEscapeRoom_Button::HandleInputTouch(UStaticMeshComponent *t) 
 {
 	TArray<AActor*> Actors;
-	GetOverlappingActors(
-		Actors
-	);
+	GetOverlappingActors(Actors);
+	if(lightOn)
+	{
+		AEscapeRoom_GameMode *GameMode = Cast<AEscapeRoom_GameMode>(UGameplayStatics::GetGameMode(this));
+		if(GameMode != nullptr)
+		{
+			GameMode->ToggleGlobalLight();
+			lightOn = false;
+
+		}		
+	}
+	else {
 
 		for(AActor* Actor : Actors)
 		{
@@ -39,9 +48,11 @@ void AEscapeRoom_Button::HandleInputTouch(UStaticMeshComponent *t)
 				if(GameMode != nullptr)
 				{
 					GameMode->ToggleGlobalLight();
+					lightOn = true;
 				}			
 			}
 		}
+	}
 }
 
 

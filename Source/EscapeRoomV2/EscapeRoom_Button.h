@@ -42,6 +42,9 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "BP_Class")
 	TSubclassOf<class AActor> ButtonClass;
 
+	bool lightOn = false;
+
+
 
 
 };
