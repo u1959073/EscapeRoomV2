@@ -51,7 +51,6 @@ void AEscapeRoom_LaserEmitter::CastLight(FVector CastOrigin, FVector CastDirecti
 	// FHitResult HitResult;
 	FCollisionShape Sphere = FCollisionShape::MakeSphere(0.5);
 	FHitResult HitResult;
-	DrawDebugLine(GetWorld(),CastOrigin,CastEnd,FColor::Red); 
 	FCollisionQueryParams TraceParams = FCollisionQueryParams();
 	TraceParams.bReturnFaceIndex=true;
 	TraceParams.bTraceComplex =true;
@@ -63,15 +62,9 @@ void AEscapeRoom_LaserEmitter::CastLight(FVector CastOrigin, FVector CastDirecti
 		TraceParams
 	);
 
-	// bool HasHit = GetWorld()->SweepSingleByChannel(
-	// 	HitResult, 
-	// 	CastOrigin, CastEnd,
-	// 	FQuat::Identity,
-	// 	ECC_GameTraceChannel1,
-	// 	Sphere
-	// );
 
 	if(HasHit){
+		DrawDebugLine(GetWorld(),CastOrigin,HitResult.ImpactPoint,FColor::Red); 
 		DrawDebugSphere(GetWorld(), HitResult.ImpactPoint, 0.5, 10, FColor::Green, false, 5);
 		// HitResult.GetComponent()->GetMaterialFromCollisionFaceIndex(HitResult.FaceIndex,HitResult.SectionIndex);
 
@@ -103,7 +96,7 @@ void AEscapeRoom_LaserEmitter::CastLight(FVector CastOrigin, FVector CastDirecti
 		}  
 	}
 	else {
-		GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Yellow, TEXT("No hit"));	
+		DrawDebugLine(GetWorld(),CastOrigin,CastEnd,FColor::Red); 
 	}
 
 }
