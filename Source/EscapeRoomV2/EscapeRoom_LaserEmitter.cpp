@@ -3,6 +3,10 @@
 
 #include "EscapeRoom_LaserEmitter.h"
 #include "Components/ArrowComponent.h"
+#include "Materials/MaterialInterface.h"
+#include "Kismet/KismetSystemLibrary.h"
+#include "Kismet/KismetMathLibrary.h"
+
 
 // Sets default values
 AEscapeRoom_LaserEmitter::AEscapeRoom_LaserEmitter()
@@ -47,39 +51,56 @@ void AEscapeRoom_LaserEmitter::CastLight(FVector CastOrigin, FVector CastDirecti
 	// FHitResult HitResult;
 	FCollisionShape Sphere = FCollisionShape::MakeSphere(0.5);
 	FHitResult HitResult;
-	// GetWorld()->LineTraceSingleByObjectType(OutHit, Start, End,);
+	DrawDebugLine(GetWorld(),CastOrigin,CastEnd,FColor::Red); 
+	FCollisionQueryParams TraceParams = FCollisionQueryParams();
+	TraceParams.bReturnFaceIndex=true;
+	TraceParams.bTraceComplex =true;
 
-
-	DrawDebugLine
-	(
-		GetWorld(),
-		CastOrigin,
-		CastEnd,
-		FColor::Red
-		// bool bPersistentLines,
-		// float LifeTime,
-		// uint8 DepthPriority,
-		// float Thickness 
-	); 
-
-	bool HasHit = GetWorld()->SweepSingleByChannel(
-		HitResult, 
-		CastOrigin, CastEnd,
-		FQuat::Identity,
+	bool HasHit = GetWorld()->LineTraceSingleByChannel(
+		HitResult,
+		CastOrigin,CastEnd,
 		ECC_GameTraceChannel1,
-		Sphere
+		TraceParams
 	);
 
-
+	// bool HasHit = GetWorld()->SweepSingleByChannel(
+	// 	HitResult, 
+	// 	CastOrigin, CastEnd,
+	// 	FQuat::Identity,
+	// 	ECC_GameTraceChannel1,
+	// 	Sphere
+	// );
 
 	if(HasHit){
 		DrawDebugSphere(GetWorld(), HitResult.ImpactPoint, 0.5, 10, FColor::Green, false, 5);
+		// HitResult.GetComponent()->GetMaterialFromCollisionFaceIndex(HitResult.FaceIndex,HitResult.SectionIndex);
 
-		if(HitResult.GetActor()->ActorHasTag("light"))
+		HitResult.GetComponent()->GetMaterial(HitResult.FaceIndex);
+		FString ComponentName = UKismetSystemLibrary::GetDisplayName(HitResult.GetComponent());
+		GEngine->AddOnScreenDebugMessage(-1, GWorld->DeltaTimeSeconds, FColor::Red, FString::Printf(TEXT("Collision component INDEX: %i"), HitResult.FaceIndex));
+
+
+		int32 SectionIndex;
+		UMaterialInterface* CollisionMaterial = HitResult.GetComponent()->GetMaterialFromCollisionFaceIndex(HitResult.FaceIndex, SectionIndex);
+		// UMaterialInterface* CollisionMaterial = HitResult.GetComponent()->GetMaterial(HitResult.FaceIndex);
+
+		if(CollisionMaterial != nullptr && MirrorMaterial != nullptr)
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Yellow, (TEXT("HitActorInCondition %s"), *HitResult.GetActor()->GetActorNameOrLabel()));
-		}
+			if(CollisionMaterial == MirrorMaterial)
+			{
+				GEngine->AddOnScreenDebugMessage(-1, GWorld->DeltaTimeSeconds, FColor::Yellow, (TEXT("HIT MIRROR")));
+				CastLight(
+					HitResult.ImpactPoint, 
+					UKismetMathLibrary::MirrorVectorByNormal(CastDirection, HitResult.ImpactNormal), 
+					CastDistance-(FVector::Distance(CastOrigin, HitResult.ImpactPoint))
+				);
+			}
+			else 
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Yellow, (TEXT("HIT NO MIRROR")));
+			}
 
+		}  
 	}
 	else {
 		GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Yellow, TEXT("No hit"));	

@@ -38,6 +38,11 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	class UArrowComponent* Arrow;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	UMaterialInterface* MirrorMaterial;
+
+
+
 	UPROPERTY(EditAnywhere)
 	float Distance = 10000.f;
 
