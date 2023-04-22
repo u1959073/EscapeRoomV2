@@ -46,6 +46,11 @@ void AEscapeRoom_Spawner::SetChildActor(UARCandidateImage* DetectedImage)
 	
 }
 
+UChildActorComponent* AEscapeRoom_Spawner::GetSpawnedActor()
+{
+	return ChildActor;
+}
+
 bool AEscapeRoom_Spawner::ChildActorHasTag(FName tag) 
 {
 	bool res = false;

@@ -6,6 +6,7 @@
 #include "Materials/MaterialInterface.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "EscapeRoom_LaserSensor.h"
 
 
 // Sets default values
@@ -13,6 +14,7 @@ AEscapeRoom_LaserEmitter::AEscapeRoom_LaserEmitter()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
 
 	EmitterRoot = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("EmitterRoot"));
 	RootComponent = EmitterRoot;
@@ -23,12 +25,15 @@ AEscapeRoom_LaserEmitter::AEscapeRoom_LaserEmitter()
 	Arrow = CreateDefaultSubobject<UArrowComponent>(TEXT("Arrow"));
 	Arrow->SetupAttachment(Emitter);
 
+	Level = 1;
+
 }
 
 // Called when the game starts or when spawned
 void AEscapeRoom_LaserEmitter::BeginPlay()
 {
 	Super::BeginPlay();
+	SetActorTickEnabled(false);
 	
 }
 
@@ -37,11 +42,22 @@ void AEscapeRoom_LaserEmitter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	// TODO: afegir un delay amb els timers de c++ perquè fer aquesta funció a cada tick és molt costós
-
 	
 	CastLight(Arrow->GetComponentLocation(),Arrow->GetForwardVector(), Distance );
 
 }
+
+bool AEscapeRoom_LaserEmitter::ManageLevel(int32 currentLevel)
+{
+	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Yellow, FString::Printf(TEXT("CurrentLevel: %i"), currentLevel));
+	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Yellow, FString::Printf(TEXT("Level: %i"), Level));
+
+	SetActorTickEnabled(Level == currentLevel);
+
+	return Level == currentLevel;
+	
+}
+
 
 void AEscapeRoom_LaserEmitter::CastLight(FVector CastOrigin, FVector CastDirection, float CastDistance)
 {
@@ -76,24 +92,28 @@ void AEscapeRoom_LaserEmitter::CastLight(FVector CastOrigin, FVector CastDirecti
 		int32 SectionIndex;
 		UMaterialInterface* CollisionMaterial = HitResult.GetComponent()->GetMaterialFromCollisionFaceIndex(HitResult.FaceIndex, SectionIndex);
 		// UMaterialInterface* CollisionMaterial = HitResult.GetComponent()->GetMaterial(HitResult.FaceIndex);
-
+	
 		if(CollisionMaterial != nullptr && MirrorMaterial != nullptr)
 		{
 			if(CollisionMaterial == MirrorMaterial)
 			{
-				GEngine->AddOnScreenDebugMessage(-1, GWorld->DeltaTimeSeconds, FColor::Yellow, (TEXT("HIT MIRROR")));
 				CastLight(
 					HitResult.ImpactPoint, 
 					UKismetMathLibrary::MirrorVectorByNormal(CastDirection, HitResult.ImpactNormal), 
 					CastDistance-(FVector::Distance(CastOrigin, HitResult.ImpactPoint))
 				);
 			}
+			else if (CollisionMaterial == SensorMaterial)
+			{
+				GEngine->AddOnScreenDebugMessage(-1, GWorld->DeltaTimeSeconds, FColor::Yellow, (TEXT("HIT SENSOR")));
+				ActivatedSensor = Cast<AEscapeRoom_LaserSensor>(HitResult.GetActor());
+			}
 			else 
 			{
-				GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Yellow, (TEXT("HIT NO MIRROR")));
+				GEngine->AddOnScreenDebugMessage(-1, GWorld->DeltaTimeSeconds, FColor::Yellow, (TEXT("HIT NO MIRROR or SENSOR")));
 			}
 
-		}  
+		}
 	}
 	else {
 		DrawDebugLine(GetWorld(),CastOrigin,CastEnd,FColor::Red); 

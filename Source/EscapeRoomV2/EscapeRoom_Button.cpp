@@ -24,11 +24,17 @@ AEscapeRoom_Button::AEscapeRoom_Button()
 
 void AEscapeRoom_Button::HandleInputTouch(UStaticMeshComponent *t) 
 {
+	AEscapeRoom_GameMode *GameMode = Cast<AEscapeRoom_GameMode>(UGameplayStatics::GetGameMode(this));
+	if(GameMode != nullptr)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Yellow, FString::Printf(TEXT("HandleInputTouch")));
+		GameMode->ManageGameLevel(1);
+	}
+
 	TArray<AActor*> Actors;
 	GetOverlappingActors(Actors);
 	if(lightOn)
 	{
-		AEscapeRoom_GameMode *GameMode = Cast<AEscapeRoom_GameMode>(UGameplayStatics::GetGameMode(this));
 		if(GameMode != nullptr)
 		{
 			GameMode->ToggleGlobalLight();
@@ -44,7 +50,7 @@ void AEscapeRoom_Button::HandleInputTouch(UStaticMeshComponent *t)
 			GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Purple, FString::Printf(TEXT("OverlapingActorName: %s"), *ActorName));
 			if(t->ComponentHasTag("pressable") && (t == ButtonMesh))
 			{
-				AEscapeRoom_GameMode *GameMode = Cast<AEscapeRoom_GameMode>(UGameplayStatics::GetGameMode(this));
+				// AEscapeRoom_GameMode *GameMode = Cast<AEscapeRoom_GameMode>(UGameplayStatics::GetGameMode(this));
 				if(GameMode != nullptr)
 				{
 					GameMode->ToggleGlobalLight();

@@ -5,9 +5,11 @@
 #include "ARBlueprintLibrary.h"
 #include "ARSessionConfig.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "Kismet/GameplayStatics.h"
 
 #include "EscapeRoom_Spawner.h"
 #include "EscapeRoom_InputMotion.h"
+#include "EscapeRoom_LaserEmitter.h"
 
 #include "ARTrackable.h"
 #include "ARBlueprintLibrary.h"
@@ -38,8 +40,6 @@ void AEscapeRoom_GameMode::Tick(float DeltaTime)
 
 	Super::Tick(DeltaTime);
 
-	GEngine->AddOnScreenDebugMessage(-1, GWorld->DeltaTimeSeconds, FColor::Green, TEXT("This is parent"));
-	
 	TArray<UARTrackedImage*> TrackedImages = UARBlueprintLibrary::GetAllGeometriesByClass<UARTrackedImage>();
 
 	// for (UARTrackedImage* i: AuxTrackedImages )
@@ -98,6 +98,44 @@ void AEscapeRoom_GameMode::Tick(float DeltaTime)
 	}
 	
 
+}
+
+void AEscapeRoom_GameMode::ManageGameLevel(int32 Level) 
+{	
+	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Yellow, FString::Printf(TEXT("ManageGameLevel")));
+
+	CurrentLevel = Level;
+	for (auto& Elem : SpawnedImages)
+	{
+		UChildActorComponent* a = Elem.Value->GetSpawnedActor();
+		if(a == nullptr)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Blue, FString::Printf(TEXT("NULL SPAWNED ACTOR")));
+		}
+		else {
+			
+			FString DisplayName = UKismetSystemLibrary::GetDisplayName(a->GetChildActor());
+			GEngine->AddOnScreenDebugMessage(
+				-1, 
+				5, 
+				FColor::Red, 
+				FString::Printf(TEXT("MANAGE GAME LEVEL"),*DisplayName)
+			);
+
+			if(AEscapeRoom_LaserEmitter* laser = Cast<AEscapeRoom_LaserEmitter>(a->GetChildActor()))
+			{
+
+				GEngine->AddOnScreenDebugMessage(
+					-1, 
+					5, 
+					FColor::Red, 
+					FString::Printf(TEXT("CAST WENT OK!"))
+				);
+
+				laser->ManageLevel(Level);
+			}
+		}
+	}
 }
 
 

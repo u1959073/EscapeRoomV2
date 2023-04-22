@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "EscapeRoom_LaserSensor.h"
 #include "EscapeRoom_Spawner.generated.h"
 
 UCLASS()
@@ -16,6 +17,7 @@ public:
 	AEscapeRoom_Spawner();
 	void SetChildActor(class UARCandidateImage* DetectedImage);
 
+	UChildActorComponent* GetSpawnedActor();
 
 	bool ChildActorHasTag(FName tag);
 
@@ -33,6 +35,9 @@ private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	UChildActorComponent* ChildActor;
+
+	// UPROPERTY(EditAnywhere, Category = "Variables")
+	// UClass* SpecificClass;  
 
 
 	UPROPERTY(EditAnywhere, Category = "Variables")

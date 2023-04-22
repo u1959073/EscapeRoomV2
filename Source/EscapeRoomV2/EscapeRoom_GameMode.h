@@ -27,6 +27,8 @@ public:
 	UFUNCTION(BlueprintImplementableEvent)
 	void ToggleGlobalLight();
 
+	void ManageGameLevel(int32 Level);
+
 
 	virtual void Tick(float DeltaTime) override;
 
@@ -45,9 +47,12 @@ private:
 	TSubclassOf<class UARTrackedImage> TrackedImageClass;
 
 	UPROPERTY(VisibleAnywhere, Category = "Variables")
-	
 	TMap<class UARCandidateImage*, class AEscapeRoom_Spawner*> SpawnedImages;
 	// TMap<class UARCandidateImage*, class AEscapeRoom_Spawner*> SpawnedImages;
+
+	UPROPERTY(VisibleAnywhere, Category = "Variables")
+	int32 CurrentLevel;
+
 
 	TArray<class UARTrackedImage*> AuxTrackedImages;
 	// APlayerController* PlayerControllerRef;	
