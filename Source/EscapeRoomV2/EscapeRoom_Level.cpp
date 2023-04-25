@@ -26,6 +26,18 @@ void AEscapeRoom_Level::Tick(float DeltaTime)
 
 }
 
+int32 AEscapeRoom_Level::GetLevel()
+{
+	return Level;
+}
+
+void AEscapeRoom_Level::SetLevel(int32 newLevel)
+{
+	Level = newLevel;
+}
+
+
+
 bool AEscapeRoom_Level::ManageLevel(int32 currentLevel)
 {
 	return false;

@@ -10,6 +10,7 @@
 #include "EscapeRoom_Spawner.h"
 #include "EscapeRoom_InputMotion.h"
 #include "EscapeRoom_LaserEmitter.h"
+#include "EscapeRoom_Level.h"
 
 #include "ARTrackable.h"
 #include "ARBlueprintLibrary.h"
@@ -65,21 +66,29 @@ void AEscapeRoom_GameMode::Tick(float DeltaTime)
 
 		AEscapeRoom_Spawner** ActualActor = SpawnedImages.Find(DetectedImage);
 
+		// Spawnegem un nou actor
 		if(!ActualActor)
 		{
 			AEscapeRoom_Spawner* NewSpawnedActor = GetWorld()->SpawnActor<AEscapeRoom_Spawner>(SpawnerClass, TrackingTransform);
-			NewSpawnedActor->SetOwner(this);
-			SpawnedImages.Add(DetectedImage, NewSpawnedActor);
-			NewSpawnedActor->SetChildActor(DetectedImage); 
-			NewSpawnedActor->AttachToComponent(RootComponent,FAttachmentTransformRules::KeepRelativeTransform);
-			ActualActor = &NewSpawnedActor;
-
-			if(NewSpawnedActor && NewSpawnedActor->ChildActorHasTag("Pin"))
+			if(NewSpawnedActor)
 			{
-				GEngine->AddOnScreenDebugMessage(-1, GWorld->DeltaTimeSeconds, FColor::Blue, TEXT("Pinable"));
-				UARBlueprintLibrary::PinComponent(NewSpawnedActor->GetRootComponent(), TrackingTransform);	
+				NewSpawnedActor->SetOwner(this);
+				SpawnedImages.Add(DetectedImage, NewSpawnedActor);
+				NewSpawnedActor->SetChildActor(DetectedImage); 
+				NewSpawnedActor->AttachToComponent(RootComponent,FAttachmentTransformRules::KeepRelativeTransform);
+			
+				ActualActor = &NewSpawnedActor;
+				SetActorLevel(CurrentLevel, NewSpawnedActor->GetSpawnedActor());
 			}
+
+
+			// if(NewSpawnedActor && NewSpawnedActor->ChildActorHasTag("Pin"))
+			// {
+			// 	GEngine->AddOnScreenDebugMessage(-1, GWorld->DeltaTimeSeconds, FColor::Blue, TEXT("Pinable"));
+			// 	UARBlueprintLibrary::PinComponent(NewSpawnedActor->GetRootComponent(), TrackingTransform);	
+			// }
 		}
+		// transformem un actor ja spawnejat
 		else {
 			if(ActualActor && !((*ActualActor)->ChildActorHasTag("Pin")))
 			{
@@ -96,8 +105,20 @@ void AEscapeRoom_GameMode::Tick(float DeltaTime)
 		);
 	// code block to be executed
 	}
-	
+}
+//TODO: aquesta funció no ha de fer el cast a LaserEmitter sinó a Level ( que ho seran tots, però millor comprovar abans de cridar el manageLevel )
 
+bool AEscapeRoom_GameMode::SetActorLevel(int32 Level, UChildActorComponent* actor)
+{
+	if(actor != nullptr )
+	{
+		if(AEscapeRoom_Level* actorLevel = Cast<AEscapeRoom_Level>(actor->GetChildActor()))
+		{
+			actorLevel->ManageLevel(Level);
+			return true;
+		}
+	}
+	return false;
 }
 
 void AEscapeRoom_GameMode::ManageGameLevel(int32 Level) 
@@ -108,33 +129,7 @@ void AEscapeRoom_GameMode::ManageGameLevel(int32 Level)
 	for (auto& Elem : SpawnedImages)
 	{
 		UChildActorComponent* a = Elem.Value->GetSpawnedActor();
-		if(a == nullptr)
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Blue, FString::Printf(TEXT("NULL SPAWNED ACTOR")));
-		}
-		else {
-			
-			FString DisplayName = UKismetSystemLibrary::GetDisplayName(a->GetChildActor());
-			GEngine->AddOnScreenDebugMessage(
-				-1, 
-				5, 
-				FColor::Red, 
-				FString::Printf(TEXT("MANAGE GAME LEVEL"),*DisplayName)
-			);
-
-			if(AEscapeRoom_LaserEmitter* laser = Cast<AEscapeRoom_LaserEmitter>(a->GetChildActor()))
-			{
-
-				GEngine->AddOnScreenDebugMessage(
-					-1, 
-					5, 
-					FColor::Red, 
-					FString::Printf(TEXT("CAST WENT OK!"))
-				);
-
-				laser->ManageLevel(Level);
-			}
-		}
+		SetActorLevel(CurrentLevel, a);
 	}
 }
 

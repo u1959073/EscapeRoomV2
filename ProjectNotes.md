@@ -34,38 +34,26 @@
 
 ### Puzles: 
 
-1. Encendre la llum general:  
+0.  Encendre la llum general: ( NO ÉS DEL TOT NIVELL, és un aspecte superior als nivells )
     - La llum està apagada, tens una eina "llanterna" al mobil, si l'encens i t'apropes molt als objectes, pots intuïr què son, però no interactuar amb ells ( excepte el botó d'encendre la llum). 
     - Quan trobes l'objecte encarregat, el podràs clicar des de la pantalla del mobil i encendre la llum general que et permetrà veure bé tots els objectes. ( això ja ens pot donar un número). Aquesta llum s'apagarà cada X segons i caldrà tornar a encendre-la manualment, en un punt de partida estaria bé poder posar un objecte pesant sobre del botó i que quedi permanentment encès ( per jugar amb timers de Unreal engine ).
 
-2. LLum ultravioleta: 
+1. LLum ultravioleta: (NIVELL 1)
     Algun objecte amaga alguna cosa.. sembla que una llum ultraviuleta revelaria el que amaga.
     - Tens una lampara a la què li falten piles, has de combinar la lampara i les piles a la mateixa pantalla perquè aquestes s'introdueixin a la lampara. Un cop encesa, col·locar-la a prop de l'objecte revelarà el que amaguen. ( en aquest cas, seria un numero de la combinació de la caixa forta final ).
     NOTES: com fer que "amagui alguna cosa?". Mostrar la meitat del numero? Que tinguin un color diferent a la resta de textures..? Que simplement sigui blanc? Que continui apagat?
 
-3. Llum lasers:  
+
+2. Llum lasers: (NIVELL 2)
     Tens una targeta que mostra amb un terre amb parets, un punt vermell, i un laser engegat. Tens una targeta que representa un mirall, caldrà que col·loquis el mirall de manera correcte perquè el reboti al punt vermell i d'aquesta manera obtinguis un numero de la combinació final. Intentar desglosar el "mapa central" amb diferents parts de manera que pugui posar objectes blocants movibles que calgui moure amb la inclinació de la targeta per tal que el laser pugui arribar al destí.
 
-4. Caixa forta: 
+3. Caixa forta: ( NIVELL )
     - Té la tipica "roda". Amb la rotació del mobil caldrà entrar els digits obtinguts en els puzles anteriors. Això permetrà obtenir una clau. 
 
-5. Porta:
+4. Porta:
     - Una carta representarà una porta ( grossa, aquesta seria la més interessant d'utiltzar l'arpin..). Tindrà varies condicions per poder ser utilitzada: haurà d'estar a un pla detectat, amb la carta posicionada verticalment, i enfocant cap al nord ( és l'únic punt cardinal que té camí des del mon virtual ). Per obrir-la s'haurà d'arrastrar la clau al pany de la porta ( detectar col·lisió ). Un cop s'obri la porta, has guanyat la partida.
 
        
-
-
-    
-
-    
-TODO 20240401:
-- Passar tota la lògica actual de fer spawn d'actors a una nova classe c++ AREscapeRoom_GameMode que serà qui ha de gestionar "l'estat" del nivell -> DONE
-- Definir una funció a AREscapeRoom_Pawn per encendre/apagar el flaix. -> IN PROGRESS
-- Fer un botó a la pantalla amb un widget per encendre/apagar el flaix.
-- fer un widget translucid que ocupi tota la pantalla i la faci "fosca". 
-- fer la lògica de la detecció de clic de botó virtual
-- llançar un event per desactivar el widget de "llum apagada" ( mirar udemy ) gestió d'events 
-- Pensar com gestionar els nivells des del game mode ( tenir 2 spawners, un d'inventari l'altre de nivells i activar els nivells amb un tag..? Tenir un spawner per nivell amb els actors corresponents? Tenir un spawner i modificar els candidates..?? Etc.), començar per activar només el botó d'encendre la llum
 
 
 

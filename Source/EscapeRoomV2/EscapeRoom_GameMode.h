@@ -34,6 +34,9 @@ public:
 
 private: 
 
+	bool SetActorLevel(int32 Level, UChildActorComponent* actor);
+
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Config", meta = (AllowPrivateAccess = "true"))
 	class UARSessionConfig* EscapeRoom_SessionConfig;
 
@@ -47,7 +50,7 @@ private:
 	TSubclassOf<class UARTrackedImage> TrackedImageClass;
 
 	UPROPERTY(VisibleAnywhere, Category = "Variables")
-	TMap<class UARCandidateImage*, class AEscapeRoom_Spawner*> SpawnedImages;
+	TMap<class UARCandidateImage*, class AEscapeRoom_Spawner*> SpawnedImages; 
 	// TMap<class UARCandidateImage*, class AEscapeRoom_Spawner*> SpawnedImages;
 
 	UPROPERTY(VisibleAnywhere, Category = "Variables")
