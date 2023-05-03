@@ -8,7 +8,7 @@
 
 void IEscapeRoom_LevelStateManager::ManageLevelState(int level)
 {
-
+    
 }
 
 

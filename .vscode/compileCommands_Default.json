@@ -40,12 +40,102 @@
 		"directory": "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
 	},
 	{
+		"file": "C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\Source\\EscapeRoomV2\\EscapeRoom_LaserEmitter.cpp",
+		"command": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe\" @C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\.vscode\\compileCommands_Default\\EscapeRoomV2.229.rsp",
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\Source\\EscapeRoomV2\\EscapeRoom_LaserEmitter.h",
+		"command": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe\" @C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\.vscode\\compileCommands_Default\\EscapeRoomV2.229.rsp",
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\Source\\EscapeRoomV2\\EscapeRoom_LaserSensor.cpp",
+		"command": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe\" @C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\.vscode\\compileCommands_Default\\EscapeRoomV2.229.rsp",
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\Source\\EscapeRoomV2\\EscapeRoom_LaserSensor.h",
+		"command": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe\" @C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\.vscode\\compileCommands_Default\\EscapeRoomV2.229.rsp",
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\Source\\EscapeRoomV2\\EscapeRoom_Level.cpp",
+		"command": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe\" @C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\.vscode\\compileCommands_Default\\EscapeRoomV2.229.rsp",
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\Source\\EscapeRoomV2\\EscapeRoom_Level.h",
+		"command": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe\" @C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\.vscode\\compileCommands_Default\\EscapeRoomV2.229.rsp",
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\Source\\EscapeRoomV2\\EscapeRoom_Level_3.cpp",
+		"command": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe\" @C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\.vscode\\compileCommands_Default\\EscapeRoomV2.229.rsp",
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\Source\\EscapeRoomV2\\EscapeRoom_Level_3.h",
+		"command": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe\" @C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\.vscode\\compileCommands_Default\\EscapeRoomV2.229.rsp",
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\Source\\EscapeRoomV2\\EscapeRoom_LevelComponent.cpp",
+		"command": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe\" @C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\.vscode\\compileCommands_Default\\EscapeRoomV2.229.rsp",
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\Source\\EscapeRoomV2\\EscapeRoom_LevelComponent.h",
+		"command": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe\" @C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\.vscode\\compileCommands_Default\\EscapeRoomV2.229.rsp",
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\Source\\EscapeRoomV2\\EscapeRoom_LevelScene.cpp",
+		"command": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe\" @C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\.vscode\\compileCommands_Default\\EscapeRoomV2.229.rsp",
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\Source\\EscapeRoomV2\\EscapeRoom_LevelScene.h",
+		"command": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe\" @C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\.vscode\\compileCommands_Default\\EscapeRoomV2.229.rsp",
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\Source\\EscapeRoomV2\\EscapeRoom_LevelStateManager.cpp",
+		"command": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe\" @C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\.vscode\\compileCommands_Default\\EscapeRoomV2.229.rsp",
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\Source\\EscapeRoomV2\\EscapeRoom_LevelStateManager.h",
+		"command": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe\" @C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\.vscode\\compileCommands_Default\\EscapeRoomV2.229.rsp",
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
+	},
+	{
 		"file": "C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\Source\\EscapeRoomV2\\EscapeRoom_Pawn.cpp",
 		"command": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe\" @C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\.vscode\\compileCommands_Default\\EscapeRoomV2.229.rsp",
 		"directory": "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
 	},
 	{
 		"file": "C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\Source\\EscapeRoomV2\\EscapeRoom_Pawn.h",
+		"command": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe\" @C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\.vscode\\compileCommands_Default\\EscapeRoomV2.229.rsp",
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\Source\\EscapeRoomV2\\EscapeRoom_ReactToTrigger.cpp",
+		"command": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe\" @C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\.vscode\\compileCommands_Default\\EscapeRoomV2.229.rsp",
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\Source\\EscapeRoomV2\\EscapeRoom_ReactToTrigger.h",
+		"command": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe\" @C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\.vscode\\compileCommands_Default\\EscapeRoomV2.229.rsp",
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\Source\\EscapeRoomV2\\EscapeRoom_SafeBox.cpp",
+		"command": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe\" @C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\.vscode\\compileCommands_Default\\EscapeRoomV2.229.rsp",
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\Source\\EscapeRoomV2\\EscapeRoom_SafeBox.h",
 		"command": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe\" @C:\\Users\\Marti\\git\\unrealEngine\\EscapeRoomV2\\.vscode\\compileCommands_Default\\EscapeRoomV2.229.rsp",
 		"directory": "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
 	},
