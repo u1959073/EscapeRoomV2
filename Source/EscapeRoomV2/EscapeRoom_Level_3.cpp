@@ -5,6 +5,9 @@
 #include "Components/SceneComponent.h"
 #include "EscapeRoom_LaserEmitter.h"
 #include "EscapeRoom_LaserSensor.h"
+#include "EscapeRoom_GameMode.h"
+#include "Kismet/GameplayStatics.h"
+
 #include "EscapeRoom_InputMotionComponent.h"
 
 
@@ -12,7 +15,9 @@ AEscapeRoom_Level_3::AEscapeRoom_Level_3()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	
+	Level = 3;
+
+
 	Scene = CreateDefaultSubobject<USceneComponent>(TEXT("Scene"));
 	RootComponent = Scene;
 
@@ -47,12 +52,14 @@ void AEscapeRoom_Level_3::BeginPlay()
 
 	FTransform SocketTransform = BaseMesh->GetSocketTransform(TEXT("LaserEmitterSocket"));
 	LaserEmitter = GetWorld()->SpawnActor<AEscapeRoom_LaserEmitter>(LaserEmitterClass, SocketTransform);
+	
 
 	if(LaserEmitter != nullptr)
 	{
 		LaserEmitterInputMotionComp->SetMovingScene(LaserEmitter->GetRootComponent());
 		LaserEmitter->AttachToComponent( BaseMesh , FAttachmentTransformRules::SnapToTargetIncludingScale, TEXT("LaserEmitterSocket"));
 		LaserEmitter->SetOwner(this);
+		LaserEmitter->SetLevel(Level);
 	}
 
 	SocketTransform = BaseMesh->GetSocketTransform(TEXT("LaserSensorSocket"));
@@ -80,8 +87,32 @@ void AEscapeRoom_Level_3::BeginPlay()
 void AEscapeRoom_Level_3::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	if(LaserEmitter->HasActiveSensor())
+	{
+		
+		AEscapeRoom_GameMode *GameMode = Cast<AEscapeRoom_GameMode>(UGameplayStatics::GetGameMode(this));
+		if(GameMode != nullptr)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Yellow, FString::Printf(TEXT("HandleInputTouch")));
+			GameMode->ManageGameLevel(Level++);
+		}
+		LaserEmitterInputMotionComp->Disable();
+		LaserSensorInputMotionComp->Disable();
+		MirrorInputMotionComp->Disable();
+
+	}
+
 	// TODO: afegir un delay amb els timers de c++ perquè fer aquesta funció a cada tick és molt costós
 	
+}
+
+bool AEscapeRoom_Level_3::ManageLevel(int32 NewLevel)
+{
+	IsActive = Level == NewLevel;
+	SetActorTickEnabled(IsActive);
+	LaserEmitter->ManageLevel(NewLevel);
+	return IsActive;
 }
 
 

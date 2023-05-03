@@ -28,6 +28,8 @@ public:
 
 	virtual bool ManageLevel(int32 level) override;
 
+	bool HasActiveSensor(); 
+
 
 private:
 	
@@ -52,6 +54,5 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float Distance = 10000.f;
-
 
 };

@@ -28,7 +28,7 @@ void AEscapeRoom_Button::HandleInputTouch(UStaticMeshComponent *t)
 	if(GameMode != nullptr)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Yellow, FString::Printf(TEXT("HandleInputTouch")));
-		GameMode->ManageGameLevel(1);
+		GameMode->ManageGameLevel(3);
 	}
 
 	TArray<AActor*> Actors;

@@ -25,7 +25,7 @@ AEscapeRoom_LaserEmitter::AEscapeRoom_LaserEmitter()
 	Arrow = CreateDefaultSubobject<UArrowComponent>(TEXT("Arrow"));
 	Arrow->SetupAttachment(Emitter);
 
-	Level = 1;
+	Level = 0;
 
 }
 
@@ -49,15 +49,16 @@ void AEscapeRoom_LaserEmitter::Tick(float DeltaTime)
 
 bool AEscapeRoom_LaserEmitter::ManageLevel(int32 currentLevel)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Yellow, FString::Printf(TEXT("CurrentLevel: %i"), currentLevel));
-	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Yellow, FString::Printf(TEXT("Level: %i"), Level));
-
-	SetActorTickEnabled(Level == currentLevel);
-
-	return Level == currentLevel;
-	
+	IsActive = Level == currentLevel;
+	SetActorTickEnabled(IsActive);
+	return IsActive;
 }
 
+
+bool AEscapeRoom_LaserEmitter::HasActiveSensor()
+{
+	return (ActivatedSensor != nullptr);
+} 
 
 void AEscapeRoom_LaserEmitter::CastLight(FVector CastOrigin, FVector CastDirection, float CastDistance)
 {
@@ -107,6 +108,7 @@ void AEscapeRoom_LaserEmitter::CastLight(FVector CastOrigin, FVector CastDirecti
 			{
 				GEngine->AddOnScreenDebugMessage(-1, GWorld->DeltaTimeSeconds, FColor::Yellow, (TEXT("HIT SENSOR")));
 				ActivatedSensor = Cast<AEscapeRoom_LaserSensor>(HitResult.GetActor());
+
 			}
 			else 
 			{
@@ -116,6 +118,7 @@ void AEscapeRoom_LaserEmitter::CastLight(FVector CastOrigin, FVector CastDirecti
 		}
 	}
 	else {
+		ActivatedSensor = nullptr;
 		DrawDebugLine(GetWorld(),CastOrigin,CastEnd,FColor::Red); 
 	}
 

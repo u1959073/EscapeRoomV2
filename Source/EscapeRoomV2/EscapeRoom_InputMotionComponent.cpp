@@ -29,6 +29,16 @@ void UEscapeRoom_InputMotionComponent::SetMovingScene(USceneComponent* SceneToMo
 	Scene = SceneToMove;
 }
 
+void UEscapeRoom_InputMotionComponent::Enable()
+{
+	SetComponentTickEnabled(true);
+}
+
+void UEscapeRoom_InputMotionComponent::Disable()
+{
+	SetComponentTickEnabled(false);
+}
+
 
 // Called when the game starts
 void UEscapeRoom_InputMotionComponent::BeginPlay()
