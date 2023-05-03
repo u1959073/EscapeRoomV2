@@ -18,6 +18,7 @@
 #include "Engine/Engine.h"
 #include "Math/TransformNonVectorized.h"
 #include "Components/InputComponent.h"
+#include "ARTypes.h"
 
 
 AEscapeRoom_GameMode::AEscapeRoom_GameMode()
@@ -58,51 +59,67 @@ void AEscapeRoom_GameMode::Tick(float DeltaTime)
 
 	// 	}
 	// }
+	GEngine->AddOnScreenDebugMessage(
+		-1, 
+		GWorld->DeltaTimeSeconds, 
+		FColor::Red, 
+		FString::Printf(TEXT("Collision component INDEX: %i"), TrackedImages.Num()));
 
 	for (UARTrackedImage* i : TrackedImages) {
-
-		UARCandidateImage* DetectedImage = i->GetDetectedImage();
-		FTransform TrackingTransform = i->GetLocalToTrackingTransform();
-
-		AEscapeRoom_Spawner** ActualActor = SpawnedImages.Find(DetectedImage);
-
-		// Spawnegem un nou actor
-		if(!ActualActor)
-		{
-			AEscapeRoom_Spawner* NewSpawnedActor = GetWorld()->SpawnActor<AEscapeRoom_Spawner>(SpawnerClass, TrackingTransform);
-			if(NewSpawnedActor)
+		
+		if(i->GetTrackingState() == EARTrackingState::NotTracking){
+			AEscapeRoom_Spawner** aux_actor = SpawnedImages.Find(i->GetDetectedImage());
+			if(aux_actor != nullptr)
 			{
-				NewSpawnedActor->SetOwner(this);
-				SpawnedImages.Add(DetectedImage, NewSpawnedActor);
-				NewSpawnedActor->SetChildActor(DetectedImage); 
-				NewSpawnedActor->AttachToComponent(RootComponent,FAttachmentTransformRules::KeepRelativeTransform);
-			
-				ActualActor = &NewSpawnedActor;
-				SetActorLevel(CurrentLevel, NewSpawnedActor->GetSpawnedActor());
+				(*aux_actor)->GetRootComponent()->SetHiddenInGame(true, true);
 			}
-
-
-			// if(NewSpawnedActor && NewSpawnedActor->ChildActorHasTag("Pin"))
-			// {
-			// 	GEngine->AddOnScreenDebugMessage(-1, GWorld->DeltaTimeSeconds, FColor::Blue, TEXT("Pinable"));
-			// 	UARBlueprintLibrary::PinComponent(NewSpawnedActor->GetRootComponent(), TrackingTransform);	
-			// }
 		}
-		// transformem un actor ja spawnejat
 		else {
-			if(ActualActor && !((*ActualActor)->ChildActorHasTag("Pin")))
+			UARBlueprintLibrary::DebugDrawTrackedGeometry(i,this,FColor::Blue,20.f,0.f);
+		
+			UARCandidateImage* DetectedImage = i->GetDetectedImage();
+			FTransform TrackingTransform = i->GetLocalToTrackingTransform();
+
+			AEscapeRoom_Spawner** ActualActor = SpawnedImages.Find(DetectedImage);
+
+			// Spawnegem un nou actor
+			if(!ActualActor)
 			{
-				(*ActualActor)->SetActorTransform(TrackingTransform, true);
-			}			
+				AEscapeRoom_Spawner* NewSpawnedActor = GetWorld()->SpawnActor<AEscapeRoom_Spawner>(SpawnerClass, TrackingTransform);
+				if(NewSpawnedActor)
+				{ 
+					NewSpawnedActor->SetOwner(this);
+					SpawnedImages.Add(DetectedImage, NewSpawnedActor);
+					NewSpawnedActor->SetChildActor(DetectedImage); 
+					NewSpawnedActor->AttachToComponent(RootComponent,FAttachmentTransformRules::KeepRelativeTransform);
+				
+					ActualActor = &NewSpawnedActor;
+					SetActorLevel(CurrentLevel, NewSpawnedActor->GetSpawnedActor());
+				}
+
+
+				// if(NewSpawnedActor && NewSpawnedActor->ChildActorHasTag("Pin"))
+				// {
+				// 	GEngine->AddOnScreenDebugMessage(-1, GWorld->DeltaTimeSeconds, FColor::Blue, TEXT("Pinable"));
+				// 	UARBlueprintLibrary::PinComponent(NewSpawnedActor->GetRootComponent(), TrackingTransform);	
+				// }
+			}
+			// transformem un actor ja spawnejat
+			else {
+				AEscapeRoom_Spawner** aux_actor = SpawnedImages.Find(i->GetDetectedImage());
+				if(aux_actor != nullptr)
+				{
+					(*aux_actor)->GetRootComponent()->SetHiddenInGame(false, true);
+				}
+
+				if(ActualActor && !((*ActualActor)->ChildActorHasTag("Pin")))
+				{
+					(*ActualActor)->SetActorTransform(TrackingTransform, true);
+				}			
+			}
 		}
 
-		UARBlueprintLibrary::DebugDrawTrackedGeometry(
-			i,
-			this,
-			FColor::Blue,
-			20.f,
-			0.f
-		);
+		
 	// code block to be executed
 	}
 }

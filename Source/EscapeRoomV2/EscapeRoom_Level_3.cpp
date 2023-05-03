@@ -88,6 +88,7 @@ void AEscapeRoom_Level_3::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+
 	if(LaserEmitter->HasActiveSensor())
 	{
 		
