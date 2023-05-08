@@ -4,10 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "EscapeRoom_Level.h"
 #include "EscapeRoom_Balancer.generated.h"
 
 UCLASS()
-class ESCAPEROOMV2_API AEscapeRoom_Balancer : public AActor
+class ESCAPEROOMV2_API AEscapeRoom_Balancer : public AEscapeRoom_Level
 {
 	GENERATED_BODY()
 	
@@ -25,6 +26,8 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	// virtual bool ManageLevel(int32 NewLevel) override;
+
 
 private: 
 
@@ -32,20 +35,10 @@ private:
 	USceneComponent* Scene;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Puzzle",  meta = (AllowPrivateAccess = "true") )
-	UStaticMeshComponent* BaseMaze;
+	UStaticMeshComponent* MovingMesh;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Puzzle",  meta = (AllowPrivateAccess = "true") )
-	UStaticMeshComponent* RollingBall;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Puzzle", meta = (AllowPrivateAccess = "true"))
-	USceneComponent* RollingBallSpawnPoint;
-
-	UPROPERTY(EditAnywhere, Category="Movement")
-	float Speed = 10.f;
-
-
-	
-
+	UPROPERTY(VisibleAnywhere, Category = "Movement")
+	class UEscapeRoom_BalancerComponent* BalancerComponent; 
 
 
 };

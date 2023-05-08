@@ -33,6 +33,9 @@ public:
 
 protected: 
 	
+	UPROPERTY(VisibleAnywhere, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	class USpotLightComponent* SpotLight;
+
 	bool IsActive;
 	int32 Level;
 

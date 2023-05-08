@@ -3,6 +3,7 @@
 
 #include "EscapeRoom_Balancer.h"
 #include "Kismet/GameplayStatics.h"
+#include "EscapeRoom_BalancerComponent.h"
 
 // Sets default values
 AEscapeRoom_Balancer::AEscapeRoom_Balancer()
@@ -13,14 +14,12 @@ AEscapeRoom_Balancer::AEscapeRoom_Balancer()
 	Scene = CreateDefaultSubobject<USceneComponent>(TEXT("Scene"));
 	RootComponent = Scene;
 
-	BaseMaze = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Base Lab"));
-	BaseMaze->SetupAttachment(Scene);
+	MovingMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Moving Mesh"));
+	MovingMesh->SetupAttachment(Scene);
 
-	RollingBall = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Rolling Ball"));
-	RollingBall->SetupAttachment(BaseMaze);
-
-	RollingBallSpawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("Spawn Point"));
-	RollingBallSpawnPoint->SetupAttachment(BaseMaze);
+	
+	BalancerComponent = CreateDefaultSubobject<UEscapeRoom_BalancerComponent>(TEXT("Balancer Component"));
+	BalancerComponent->SetMovingScene(RootComponent);
 
 }
 
@@ -28,7 +27,7 @@ AEscapeRoom_Balancer::AEscapeRoom_Balancer()
 void AEscapeRoom_Balancer::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	SetActorTickEnabled(true);
 }
 
 // Called every frame
@@ -36,34 +35,8 @@ void AEscapeRoom_Balancer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	Move();
-
-	FRotator RootRotation = RootComponent->GetComponentRotation();
-	FRotator ActorRotation = this->GetActorRotation();
-
-	FString StringRootRotation = RootRotation.ToString();
-	FString StringActorRotation = ActorRotation.ToString();
-
-
-	GEngine->AddOnScreenDebugMessage(-1, GWorld->DeltaTimeSeconds, FColor::Yellow, FString::Printf(TEXT("ActorRotation: %s"), *StringActorRotation) );
-	GEngine->AddOnScreenDebugMessage(-1, GWorld->DeltaTimeSeconds, FColor::Green, FString::Printf(TEXT("RootRotation: %s"), *StringRootRotation));
-
-
 }
 
 
-void AEscapeRoom_Balancer::Move()
-{
-	FRotator RootRotation = RootComponent->GetComponentRotation();
 
-	GEngine->AddOnScreenDebugMessage(-1, GWorld->DeltaTimeSeconds, FColor::Yellow, FString::Printf(TEXT("moving")) );
-
-
-	FVector DeltaLocation = FVector::ZeroVector;
-	DeltaLocation.X = -RootRotation.Pitch * Speed * UGameplayStatics::GetWorldDeltaSeconds(this);
-	DeltaLocation.Y = RootRotation.Roll * Speed * UGameplayStatics::GetWorldDeltaSeconds(this);
-	RollingBall->AddLocalOffset(DeltaLocation, true);
-
-	// AddActorLocalOffset(DeltaLocation, true);
-}
 
