@@ -19,14 +19,21 @@ protected:
 	virtual void BeginPlay() override;
 
 
-public:	
+public:		
 	// Called every frame
 
 	AEscapeRoom_GameMode();
 
-	UFUNCTION(BlueprintImplementableEvent)
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
 	void ToggleGlobalLight();
 
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+	void CloseInputCodeWitget();
+
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+	void OpenInputCodeWitget();
+
+	UFUNCTION(BlueprintCallable)
 	void ManageGameLevel(int32 Level);
 
 

@@ -36,9 +36,6 @@ AEscapeRoom_Level_3::AEscapeRoom_Level_3()
 	LaserEmitterInputMotionComp = CreateDefaultSubobject<UEscapeRoom_InputMotionComponent>(TEXT("Laser Emitter Input Motion Component"));
 	LaserSensorInputMotionComp = CreateDefaultSubobject<UEscapeRoom_InputMotionComponent>(TEXT("Laser Sensor Input Motion Component"));
 	MirrorInputMotionComp = CreateDefaultSubobject<UEscapeRoom_InputMotionComponent>(TEXT("Mirror Input Motion Component"));
-	
-
-
 
 }
 
@@ -48,7 +45,6 @@ void AEscapeRoom_Level_3::BeginPlay()
 	Super::BeginPlay();
 	// SetActorTickEnabled(false);
 
-	GetRootComponent();
 
 	FTransform SocketTransform = BaseMesh->GetSocketTransform(TEXT("LaserEmitterSocket"));
 	LaserEmitter = GetWorld()->SpawnActor<AEscapeRoom_LaserEmitter>(LaserEmitterClass, SocketTransform);

@@ -18,17 +18,19 @@ AEscapeRoom_Button::AEscapeRoom_Button()
 	ButtonMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Button Mesh"));
 	ButtonMesh->SetupAttachment(Scene);
 
+	lightOn = false;
+
 
 }
 
-
+ 
 void AEscapeRoom_Button::HandleInputTouch(UStaticMeshComponent *t) 
 {
 	AEscapeRoom_GameMode *GameMode = Cast<AEscapeRoom_GameMode>(UGameplayStatics::GetGameMode(this));
 	if(GameMode != nullptr)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Yellow, FString::Printf(TEXT("HandleInputTouch")));
-		GameMode->ManageGameLevel(3);
+		GameMode->ManageGameLevel(1);
 	}
 
 	TArray<AActor*> Actors;
