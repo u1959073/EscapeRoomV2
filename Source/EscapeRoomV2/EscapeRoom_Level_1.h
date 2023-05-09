@@ -23,6 +23,9 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	virtual bool ManageLevel(int32 NewLevel) override;
 
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+	void SetWarningLight(bool IsRight);
+
 
 private:
 

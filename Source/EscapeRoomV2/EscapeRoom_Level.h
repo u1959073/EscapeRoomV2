@@ -29,14 +29,15 @@ public:
 	virtual void SetLevel(int32 newLevel);
 	virtual int32 GetLevel();
 
-
-
 protected: 
 	
 	UPROPERTY(VisibleAnywhere, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	class USpotLightComponent* SpotLight;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	bool IsActive;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	int32 Level;
 
 };

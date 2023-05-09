@@ -34,6 +34,10 @@ public:
 	void OpenInputCodeWitget();
 
 	UFUNCTION(BlueprintCallable)
+	int32 GetCurrentLevel();
+
+
+	UFUNCTION(BlueprintCallable)
 	void ManageGameLevel(int32 Level);
 
 

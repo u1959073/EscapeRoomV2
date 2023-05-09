@@ -138,6 +138,11 @@ bool AEscapeRoom_GameMode::SetActorLevel(int32 Level, UChildActorComponent* acto
 	return false;
 }
 
+int32 AEscapeRoom_GameMode::GetCurrentLevel()
+{
+	return CurrentLevel;
+}
+
 void AEscapeRoom_GameMode::ManageGameLevel(int32 Level) 
 {	
 	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Yellow, FString::Printf(TEXT("ManageGameLevel")));

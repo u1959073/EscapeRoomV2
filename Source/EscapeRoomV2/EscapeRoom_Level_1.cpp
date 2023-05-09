@@ -54,6 +54,7 @@ void AEscapeRoom_Level_1::Tick(float DeltaTime)
 bool AEscapeRoom_Level_1::ManageLevel(int32 NewLevel)
 {
 	IsActive = Level == NewLevel;
+	SetWarningLight(Level < NewLevel);
 	SetActorTickEnabled(true);
 	return IsActive;
 }
