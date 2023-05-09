@@ -32,10 +32,10 @@ private:
 	UStaticMeshComponent* BaseMesh;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
-	class UBoxComponent* CollisionBox_1;
+	class UEscapeRoom_Trigger* CollisionBox_1;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
-	class UBoxComponent* CollisionBox_2;
+	class UEscapeRoom_Trigger* CollisionBox_2;
 
 	UPROPERTY()
 	class AEscapeRoom_Balancer* Balancer_1;

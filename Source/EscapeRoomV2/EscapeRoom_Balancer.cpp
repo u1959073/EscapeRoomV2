@@ -27,7 +27,7 @@ AEscapeRoom_Balancer::AEscapeRoom_Balancer()
 void AEscapeRoom_Balancer::BeginPlay()
 {
 	Super::BeginPlay();
-	SetActorTickEnabled(true);
+	SetActorTickEnabled(false);
 }
 
 // Called every frame
@@ -36,6 +36,15 @@ void AEscapeRoom_Balancer::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 }
+
+bool AEscapeRoom_Balancer::ManageLevel(int32 NewLevel)
+{
+	IsActive = Level == NewLevel;
+	IsActive ? BalancerComponent->Enable() : BalancerComponent->Disable(); 
+	SetActorTickEnabled(IsActive);
+	return IsActive;
+}
+
 
 
 

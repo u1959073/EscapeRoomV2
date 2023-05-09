@@ -38,7 +38,7 @@ private:
 	USceneComponent* Scene;
 
 	UPROPERTY(EditAnywhere, Category="Movement")
-	float Speed = 10.f;
+	float Speed = 20.f;
 
 		
 };

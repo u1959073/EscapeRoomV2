@@ -7,7 +7,8 @@
 #include "Components/SceneComponent.h"
 #include "EscapeRoom_GameMode.h"
 #include "Kismet/GameplayStatics.h"
-#include "Components/BoxComponent.h"
+// #include "Components/BoxComponent.h"
+#include "EscapeRoom_Trigger.h"
 
 
 AEscapeRoom_Level_2::AEscapeRoom_Level_2()
@@ -25,10 +26,10 @@ AEscapeRoom_Level_2::AEscapeRoom_Level_2()
     BaseMesh->bDrawMeshCollisionIfSimple = true;
     BaseMesh->bDrawMeshCollisionIfComplex = true;
 
-	CollisionBox_1 = CreateDefaultSubobject<UBoxComponent>(TEXT("Collision Box 1"));
+	CollisionBox_1 = CreateDefaultSubobject<UEscapeRoom_Trigger>(TEXT("Collision Box 1"));
 	CollisionBox_1->SetupAttachment(Scene);
 
-	CollisionBox_2 = CreateDefaultSubobject<UBoxComponent>(TEXT("Collision Box 2"));
+	CollisionBox_2 = CreateDefaultSubobject<UEscapeRoom_Trigger>(TEXT("Collision Box 2"));
 	CollisionBox_2->SetupAttachment(Scene);
 
 }
@@ -77,6 +78,16 @@ void AEscapeRoom_Level_2::BeginPlay()
 void AEscapeRoom_Level_2::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	if(CollisionBox_1->IsPressed() && CollisionBox_2->IsPressed())
+	{
+		GEngine->AddOnScreenDebugMessage(-1, GWorld->DeltaTimeSeconds, FColor::Yellow, FString::Printf(TEXT("Next Level!")) );
+		AEscapeRoom_GameMode *GameMode = Cast<AEscapeRoom_GameMode>(UGameplayStatics::GetGameMode(this));
+		if(GameMode != nullptr)
+		{
+			GameMode->ManageGameLevel(3);
+		}
+
+	}	
     // Comprovar collisions
 }
 
@@ -84,6 +95,14 @@ bool AEscapeRoom_Level_2::ManageLevel(int32 NewLevel)
 {
 	
     IsActive = Level == NewLevel;
-	SetActorTickEnabled(true);
+	SetActorTickEnabled(IsActive);
+	if(Balancer_1 != nullptr)
+	{
+		Balancer_1->ManageLevel(NewLevel);
+	}
+	if(Balancer_2 != nullptr)
+	{
+		Balancer_2->ManageLevel(NewLevel);
+	}
 	return IsActive;
 }

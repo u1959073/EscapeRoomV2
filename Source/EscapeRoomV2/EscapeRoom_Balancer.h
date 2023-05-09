@@ -18,6 +18,7 @@ private:
 public:	
 	// Sets default values for this actor's properties
 	AEscapeRoom_Balancer();
+	
 
 protected:
 	// Called when the game starts or when spawned
@@ -26,7 +27,7 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	// virtual bool ManageLevel(int32 NewLevel) override;
+	virtual bool ManageLevel(int32 NewLevel) override;
 
 
 private: 

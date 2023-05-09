@@ -32,17 +32,6 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	USceneComponent* Scene;
 
-	UPROPERTY()
-	class AActor* UVTextCode;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
-	TSubclassOf<class AActor> UVTextCodeClass;
-
-	UPROPERTY()
-	class AActor* UVLight;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
-	TSubclassOf<class AActor> UVLightClass;
-
+	
 
 };

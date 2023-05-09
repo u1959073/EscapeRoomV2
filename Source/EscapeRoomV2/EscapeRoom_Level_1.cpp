@@ -9,14 +9,11 @@ AEscapeRoom_Level_1::AEscapeRoom_Level_1()
 	PrimaryActorTick.bCanEverTick = true;
 	Level = 1;
 
-
 	Scene = CreateDefaultSubobject<USceneComponent>(TEXT("Scene"));
 	RootComponent = Scene;
 
 	BaseMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Base Mesh"));
 	BaseMesh->SetupAttachment(Scene);
-
-    
 
 }
 
@@ -27,13 +24,13 @@ void AEscapeRoom_Level_1::BeginPlay()
 	
 	SetActorTickEnabled(true);
 
-	FTransform SocketTransform = BaseMesh->GetSocketTransform(TEXT("UVTextSocket"));
-	UVTextCode = GetWorld()->SpawnActor<AActor>(UVTextCodeClass, SocketTransform);
-	if(UVTextCode != nullptr)
-	{
-		UVTextCode->AttachToComponent( BaseMesh , FAttachmentTransformRules::SnapToTargetIncludingScale, TEXT("UVTextSocket"));
-		UVTextCode->SetOwner(this);
-	}
+	// FTransform SocketTransform = BaseMesh->GetSocketTransform(TEXT("UVTextSocket"));
+	// UVTextCode = GetWorld()->SpawnActor<AActor>(UVTextCodeClass, SocketTransform);
+	// if(UVTextCode != nullptr)
+	// {
+	// 	UVTextCode->AttachToComponent( BaseMesh , FAttachmentTransformRules::SnapToTargetIncludingScale, TEXT("UVTextSocket"));
+	// 	UVTextCode->SetOwner(this);
+	// }
 
 	// SocketTransform = BaseMesh->GetSocketTransform(TEXT("UVLightSocket"));
 	// UVLight = GetWorld()->SpawnActor<AActor>(UVLightClass, SocketTransform);

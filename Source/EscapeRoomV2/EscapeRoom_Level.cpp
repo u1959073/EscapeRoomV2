@@ -26,7 +26,7 @@ AEscapeRoom_Level::AEscapeRoom_Level()
     SpotLight->SetOuterConeAngle(45.0f);
 	SpotLight->SetAttenuationRadius(500.0f);
 	FRotator LightRotation = FRotator(-90.f, 0.f, 0.f); 
-	SpotLight->AddLocalRotation(LightRotation);
+	SpotLight->AddWorldRotation(LightRotation);
 
 
 
