@@ -25,6 +25,8 @@ AEscapeRoom_GameMode::AEscapeRoom_GameMode()
 {
     PrimaryActorTick.bStartWithTickEnabled = true;
     PrimaryActorTick.bCanEverTick = true;
+	CurrentLevel = 0;
+
 }
 
 

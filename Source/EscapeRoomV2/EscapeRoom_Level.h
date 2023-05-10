@@ -4,10 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "I_EscapeRoom_Dialog.h"
 #include "EscapeRoom_Level.generated.h"
 
 UCLASS()
-class ESCAPEROOMV2_API AEscapeRoom_Level : public AActor
+class ESCAPEROOMV2_API AEscapeRoom_Level : public AActor, public II_EscapeRoom_Dialog
 {
 	GENERATED_BODY()
 	

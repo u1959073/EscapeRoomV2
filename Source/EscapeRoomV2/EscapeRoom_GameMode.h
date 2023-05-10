@@ -4,13 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
+#include "I_EscapeRoom_Dialog.h"
 #include "EscapeRoom_GameMode.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class ESCAPEROOMV2_API AEscapeRoom_GameMode : public AGameModeBase
+class ESCAPEROOMV2_API AEscapeRoom_GameMode : public AGameModeBase, public II_EscapeRoom_Dialog
 {
 	GENERATED_BODY()
 
@@ -64,7 +65,7 @@ private:
 	TMap<class UARCandidateImage*, class AEscapeRoom_Spawner*> SpawnedImages; 
 	// TMap<class UARCandidateImage*, class AEscapeRoom_Spawner*> SpawnedImages;
 
-	UPROPERTY(VisibleAnywhere, Category = "Variables")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Variables",  meta = (AllowPrivateAccess = "true"))
 	int32 CurrentLevel;
 
 

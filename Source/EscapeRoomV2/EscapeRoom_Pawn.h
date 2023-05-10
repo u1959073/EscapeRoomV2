@@ -32,6 +32,13 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Light")
 	void ToggleFlashLight();
 
+	UFUNCTION(BlueprintCallable, Category="Light")
+	void SetDialogCollision(bool ActorDialog);
+
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category="Light")
+	void OnHelpRequest();
+
+
 private: 
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
@@ -43,10 +50,14 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	class UCapsuleComponent* FlashlightCollisionComponent;
 
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	class UCapsuleComponent* DialogCollisionComponent;
+
+
 	UPROPERTY(EditDefaultsOnly, Category = "BP_Class")
 	TSubclassOf<class AActor> ButtonClass;
 
-
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	APlayerController* PlayerControllerRef;
 
 

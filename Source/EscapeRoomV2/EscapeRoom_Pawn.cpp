@@ -33,6 +33,12 @@ AEscapeRoom_Pawn::AEscapeRoom_Pawn()
 
 	FlashlightCollisionComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
+
+	DialogCollisionComponent = CreateDefaultSubobject<UCapsuleComponent>(TEXT("DialogCollisionComponent"));
+	DialogCollisionComponent->SetupAttachment(Camera);
+	DialogCollisionComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+
     // Set default properties for the light
     SpotFlashlight->SetIntensity(10000.0f);
     SpotFlashlight->SetVisibility(false);
@@ -83,7 +89,17 @@ void AEscapeRoom_Pawn::Tick(float DeltaTime)
 void AEscapeRoom_Pawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+}
 
+void AEscapeRoom_Pawn::SetDialogCollision(bool ActorDialog)
+{
+	if(ActorDialog)
+	{
+		DialogCollisionComponent->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	}
+	else {
+		DialogCollisionComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	}
 }
 
 

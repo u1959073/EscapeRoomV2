@@ -33,8 +33,7 @@ void AEscapeRoom_Button::HandleInputTouch(UStaticMeshComponent *t)
 		GameMode->ManageGameLevel(1);
 	}
 
-	TArray<AActor*> Actors;
-	GetOverlappingActors(Actors);
+	
 	if(lightOn)
 	{
 		if(GameMode != nullptr)
@@ -45,7 +44,8 @@ void AEscapeRoom_Button::HandleInputTouch(UStaticMeshComponent *t)
 		}		
 	}
 	else {
-
+		TArray<AActor*> Actors;
+		GetOverlappingActors(Actors);
 		for(AActor* Actor : Actors)
 		{
 			FString ActorName = Actor->GetActorNameOrLabel();
