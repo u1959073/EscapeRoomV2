@@ -41,4 +41,17 @@ protected:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	int32 Level;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	TArray<FString> Hints;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	int32 HintIndex;
+
+	UPROPERTY(VisibleInstanceOnly, Category = "Widget", meta = (AllowPrivateAccess = "true"))
+	class UHintWidget* HintWidget;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Class Types", meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<class UUserWidget> HintWidgetClass;
+
+
 };

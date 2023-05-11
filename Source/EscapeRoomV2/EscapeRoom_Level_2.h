@@ -23,6 +23,9 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	virtual bool ManageLevel(int32 NewLevel) override;
 
+	UFUNCTION(BlueprintCallable, Category="Dialog")
+	void ShowHint_Implementation() override;
+
 private:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
@@ -43,9 +46,11 @@ private:
 	UPROPERTY()
 	class AEscapeRoom_Balancer* Balancer_2;
 
-
 	UPROPERTY(EditDefaultsOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	TSubclassOf<class AEscapeRoom_Balancer> BalancerClass;
+
+
+	
 
 
 };

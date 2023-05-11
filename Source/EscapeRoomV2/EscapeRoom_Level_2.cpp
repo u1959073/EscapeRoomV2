@@ -7,6 +7,9 @@
 #include "Components/SceneComponent.h"
 #include "EscapeRoom_GameMode.h"
 #include "Kismet/GameplayStatics.h"
+#include "Blueprint/UserWidget.h"
+#include "HintWidget.h"
+
 // #include "Components/BoxComponent.h"
 #include "EscapeRoom_Trigger.h"
 
@@ -105,4 +108,21 @@ bool AEscapeRoom_Level_2::ManageLevel(int32 NewLevel)
 		Balancer_2->ManageLevel(NewLevel);
 	}
 	return IsActive;
+}
+
+void AEscapeRoom_Level_2::ShowHint_Implementation()
+{
+	GEngine->AddOnScreenDebugMessage(-1, GWorld->DeltaTimeSeconds, FColor::Yellow, FString::Printf(TEXT("SHOWING LEVEL 2 HINT")) );
+	if(IsValid(HintWidgetClass))
+	{
+		HintWidget = Cast<UHintWidget>(CreateWidget(GetWorld(), HintWidgetClass));
+		if(HintWidget != nullptr)
+		{
+			HintWidget->AddToViewport();
+			HintWidget->PrintText("TEXT DE PROVA!");
+		}
+	}
+	
+	
+
 }
