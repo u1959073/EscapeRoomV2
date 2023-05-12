@@ -28,7 +28,12 @@ public:
 	
 	virtual bool ManageLevel(int32 currentLevel);
 	virtual void SetLevel(int32 newLevel);
+	virtual void SetHints(int32 newLevel);
+
 	virtual int32 GetLevel();
+
+	UFUNCTION(BlueprintCallable, Category="Dialog")
+	void ShowHint_Implementation() override;
 
 protected: 
 	

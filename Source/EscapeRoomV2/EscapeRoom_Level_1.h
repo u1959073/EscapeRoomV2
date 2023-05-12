@@ -26,6 +26,11 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
 	void SetWarningLight(bool IsRight);
 
+	virtual void SetHints(int32 newLevel) override;
+
+	// UFUNCTION(BlueprintCallable, Category="Dialog")
+	// void ShowHint_Implementation() override;
+
 
 private:
 

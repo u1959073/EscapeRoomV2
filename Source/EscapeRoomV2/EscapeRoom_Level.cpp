@@ -5,6 +5,9 @@
 
 #include "EscapeRoom_Level.h"
 #include "Components/SpotLightComponent.h"
+#include "Components/SlateWrapperTypes.h"
+#include "Blueprint/UserWidget.h"
+#include "HintWidget.h"
 
 
 
@@ -55,6 +58,43 @@ void AEscapeRoom_Level::SetLevel(int32 newLevel)
 {
 	Level = newLevel;
 }
+
+void AEscapeRoom_Level::SetHints(int32 newLevel)
+{
+	
+}
+
+void AEscapeRoom_Level::ShowHint_Implementation()
+{
+	GEngine->AddOnScreenDebugMessage(-1, GWorld->DeltaTimeSeconds, FColor::Yellow, FString::Printf(TEXT("SHOWING LEVEL 2 HINT")) );
+	if(IsValid(HintWidgetClass))
+	{
+		if(HintWidget == nullptr)
+		{
+			HintWidget = Cast<UHintWidget>(CreateWidget(GetWorld(), HintWidgetClass));
+			if(HintWidget != nullptr)
+			{
+				HintWidget->AddToViewport();
+				HintWidget->PrintText(Hints[HintIndex]);
+				HintIndex++;
+				if(HintIndex >= Hints.Num())
+				{
+					HintIndex = 0;
+				}
+			}
+		}
+		else{
+			HintWidget->SetVisibility(ESlateVisibility::Visible);
+			HintWidget->PrintText(Hints[HintIndex]);
+			if(HintIndex >= Hints.Num())
+			{
+				HintIndex = 0;
+			}
+		}
+	}
+
+}
+
 
 
 

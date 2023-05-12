@@ -108,8 +108,30 @@ bool AEscapeRoom_Level_3::ManageLevel(int32 NewLevel)
 {
 	IsActive = Level == NewLevel;
 	SetActorTickEnabled(IsActive);
+	SetHints(NewLevel);
 	LaserEmitter->ManageLevel(NewLevel);
 	return IsActive;
+}
+
+void AEscapeRoom_Level_3::SetHints(int32 newLevel)
+{
+	Hints.Empty();
+	HintIndex = 0;
+	if(newLevel < Level)
+	{
+		Hints.Emplace(TEXT("To fire the laser and light up the way,\nPress the buttons in the correct array."));
+		Hints.Emplace(TEXT("Buttons must be pushed with care,\nTo activate the laser beam in the air"));
+
+	}
+	else if(newLevel == Level)
+	{
+		Hints.Emplace(TEXT("The laser beam needs a guiding hand,\nBounce it off mirrors to hit the sensor stand."));
+		Hints.Emplace(TEXT("The sensor waits for the laser's shine,\nUse mirrors to guide it and align"));
+	}
+	else if(newLevel > Level)
+	{
+		Hints.Emplace(TEXT("This level has already been solved."));
+	}
 }
 
 

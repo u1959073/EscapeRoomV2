@@ -1,3 +1,11 @@
+TODO demà: 
+- Implementar void AEscapeRoom_Level_2::ShowHint_Implementation() per tots els actors que hagin de tenir pistes
+- Assignar les pistes de tots els nivells en el ManageLevel()
+- Afegir el text amb UV un cop superat el nivell pel codi de nivell final 
+- Fer nivell caixa forta 
+- Fer nivell porta al nord
+
+
 ## Mecàniques disponibles:
 - interacció al toc de pantalla
 - interacció a la inclinació de la targeta

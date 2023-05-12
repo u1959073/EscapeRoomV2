@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "EscapeRoom_Level.h"
+#include <vector>
+#include <string>
 #include "EscapeRoom_Level_2.generated.h"
 
 /**
@@ -22,11 +24,15 @@ public:
 	AEscapeRoom_Level_2();
 	virtual void Tick(float DeltaTime) override;
 	virtual bool ManageLevel(int32 NewLevel) override;
+	virtual void SetHints(int32 newLevel) override;
 
-	UFUNCTION(BlueprintCallable, Category="Dialog")
-	void ShowHint_Implementation() override;
+	// UFUNCTION(BlueprintCallable, Category="Dialog")
+	// void ShowHint_Implementation() override;
 
 private:
+
+	
+
 
 	UPROPERTY(EditDefaultsOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	USceneComponent* Scene;

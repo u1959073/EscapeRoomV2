@@ -2,6 +2,10 @@
 
 
 #include "EscapeRoom_Level_1.h"
+#include "Blueprint/UserWidget.h"
+#include "HintWidget.h"
+#include "Layout/Visibility.h"
+#include "Components/SlateWrapperTypes.h"
 
 AEscapeRoom_Level_1::AEscapeRoom_Level_1()
 {
@@ -56,5 +60,56 @@ bool AEscapeRoom_Level_1::ManageLevel(int32 NewLevel)
 	IsActive = Level == NewLevel;
 	SetWarningLight(Level < NewLevel);
 	SetActorTickEnabled(true);
+	SetHints(NewLevel);
 	return IsActive;
+}
+
+// void AEscapeRoom_Level_1::ShowHint_Implementation()
+// {
+// 	GEngine->AddOnScreenDebugMessage(-1, GWorld->DeltaTimeSeconds, FColor::Yellow, FString::Printf(TEXT("SHOWING LEVEL 2 HINT")) );
+// 	if(IsValid(HintWidgetClass))
+// 	{
+// 		if(HintWidget == nullptr)
+// 		{
+// 			HintWidget = Cast<UHintWidget>(CreateWidget(GetWorld(), HintWidgetClass));
+// 			if(HintWidget != nullptr)
+// 			{
+// 				HintWidget->AddToViewport();
+// 				HintWidget->PrintText(Hints[HintIndex]);
+// 				HintIndex++;
+// 				if(HintIndex >= Hints.Num())
+// 				{
+// 					HintIndex = 0;
+// 				}
+// 			}
+// 		}
+// 		else{
+// 			HintWidget->SetVisibility(ESlateVisibility::Visible);
+// 			HintWidget->PrintText(Hints[HintIndex]);
+// 			if(HintIndex >= Hints.Num())
+// 			{
+// 				HintIndex = 0;
+// 			}
+// 		}
+// 	}
+
+// }
+
+void AEscapeRoom_Level_1::SetHints(int32 newLevel)
+{
+	Hints.Empty();
+	HintIndex = 0;
+	if(newLevel < Level)
+	{
+		Hints.Emplace(TEXT("You are not ready yet."));
+	}
+	else if(newLevel == Level)
+	{
+		Hints.Emplace(TEXT("What's hidden can't be seen by sight,\nUse this light to make it bright."));
+		Hints.Emplace(TEXT("Invisible ink lies on this page,\nShine a UV light to reveal the sage."));
+	}
+	else if(newLevel > Level)
+	{
+		Hints.Emplace(TEXT("This level has already been solved."));
+	}
 }

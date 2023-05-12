@@ -9,6 +9,8 @@
 #include "Kismet/GameplayStatics.h"
 #include "Blueprint/UserWidget.h"
 #include "HintWidget.h"
+#include "Layout/Visibility.h"
+#include "Components/SlateWrapperTypes.h"
 
 // #include "Components/BoxComponent.h"
 #include "EscapeRoom_Trigger.h"
@@ -19,6 +21,7 @@ AEscapeRoom_Level_2::AEscapeRoom_Level_2()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	Level = 2;
+	HintIndex = 0;
 
 	Scene = CreateDefaultSubobject<USceneComponent>(TEXT("Scene"));
 	RootComponent = Scene;
@@ -34,6 +37,8 @@ AEscapeRoom_Level_2::AEscapeRoom_Level_2()
 
 	CollisionBox_2 = CreateDefaultSubobject<UEscapeRoom_Trigger>(TEXT("Collision Box 2"));
 	CollisionBox_2->SetupAttachment(Scene);
+
+	
 
 }
 
@@ -99,6 +104,8 @@ bool AEscapeRoom_Level_2::ManageLevel(int32 NewLevel)
 	
     IsActive = Level == NewLevel;
 	SetActorTickEnabled(IsActive);
+	SetHints(NewLevel);
+	HintIndex = 0;
 	if(Balancer_1 != nullptr)
 	{
 		Balancer_1->ManageLevel(NewLevel);
@@ -110,19 +117,47 @@ bool AEscapeRoom_Level_2::ManageLevel(int32 NewLevel)
 	return IsActive;
 }
 
-void AEscapeRoom_Level_2::ShowHint_Implementation()
-{
-	GEngine->AddOnScreenDebugMessage(-1, GWorld->DeltaTimeSeconds, FColor::Yellow, FString::Printf(TEXT("SHOWING LEVEL 2 HINT")) );
-	if(IsValid(HintWidgetClass))
-	{
-		HintWidget = Cast<UHintWidget>(CreateWidget(GetWorld(), HintWidgetClass));
-		if(HintWidget != nullptr)
-		{
-			HintWidget->AddToViewport();
-			HintWidget->PrintText("TEXT DE PROVA!");
-		}
-	}
-	
-	
+// void AEscapeRoom_Level_2::ShowHint_Implementation()
+// {
+// 	GEngine->AddOnScreenDebugMessage(-1, GWorld->DeltaTimeSeconds, FColor::Yellow, FString::Printf(TEXT("SHOWING LEVEL 2 HINT")) );
+// 	if(IsValid(HintWidgetClass))
+// 	{
+// 		if(HintWidget == nullptr)
+// 		{
+// 			HintWidget = Cast<UHintWidget>(CreateWidget(GetWorld(), HintWidgetClass));
+// 			if(HintWidget != nullptr)
+// 			{
+// 				HintWidget->AddToViewport();
+// 				HintWidget->PrintText(Hints[HintIndex]);
+// 				HintIndex++;
+// 				if(HintIndex >= Hints.Num())
+// 				{
+// 					HintIndex = 0;
+// 				}
+// 			}
+// 		}
+// 		else{
+// 			HintWidget->SetVisibility(ESlateVisibility::Visible);
+// 		}
+// 	}
 
+// }
+
+void AEscapeRoom_Level_2::SetHints(int32 newLevel)
+{
+	Hints.Empty();
+	HintIndex = 0;
+	if(newLevel < Level)
+	{
+		Hints.Emplace(TEXT("Crack the code before you proceed,\nTo unlock the path you need."));
+	}
+	else if(newLevel == Level)
+	{
+		Hints.Emplace(TEXT("Move with grace, tilt with might,\nActivate the buttons to shed some light."));
+		Hints.Emplace(TEXT("Use the force of motion to make a switch,\nTilt your world and make them twitch."));
+	}
+	else if(newLevel > Level)
+	{
+		Hints.Emplace(TEXT("This level has already been solved."));
+	}
 }

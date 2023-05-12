@@ -23,6 +23,7 @@ public:
 	AEscapeRoom_Level_3();
 	virtual void Tick(float DeltaTime) override;
 	virtual bool ManageLevel(int32 NewLevel) override;
+	virtual void SetHints(int32 newLevel) override;
 
 
 private:
