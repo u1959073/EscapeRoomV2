@@ -29,6 +29,7 @@ public:
 	virtual bool ManageLevel(int32 currentLevel);
 	virtual void SetLevel(int32 newLevel);
 	virtual void SetHints(int32 newLevel);
+	virtual void SpawnCompletedLevelHint();
 
 	virtual int32 GetLevel();
 
@@ -57,6 +58,17 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Class Types", meta = (AllowPrivateAccess = "true"))
 	TSubclassOf<class UUserWidget> HintWidgetClass;
+
+
+	// Last Hint ( code number shown with UVLight spawned when level is completed )
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	USceneComponent* SpawnPoint;
+
+	UPROPERTY()
+	class AActor* UVTextCompletedHint;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Class Types", meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<class AActor> UVTextCompletedHintClass;
 
 
 };

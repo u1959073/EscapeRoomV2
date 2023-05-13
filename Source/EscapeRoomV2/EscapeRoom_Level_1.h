@@ -40,6 +40,10 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	USceneComponent* Scene;
 
+	// Last Hint ( code number shown with UVLight spawned when level is completed )
+	// UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	// USceneComponent* LevelCompletedHintSpawnPoint_1;
+
 	
 
 };

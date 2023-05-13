@@ -19,6 +19,16 @@ AEscapeRoom_Level_1::AEscapeRoom_Level_1()
 	BaseMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Base Mesh"));
 	BaseMesh->SetupAttachment(Scene);
 
+
+	SpawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("Spawn Point"));
+	SpawnPoint->SetupAttachment(RootComponent);
+
+
+	// LevelCompletedHintSpawnPoint_1 = CreateDefaultSubobject<USceneComponent>(TEXT("Level 1 Completed Hint Spawn Point"));
+	// LevelCompletedHintSpawnPoint_1->SetupAttachment(Scene);
+	// LevelCompletedHintSpawnPoint = LevelCompletedHintSpawnPoint_1;
+
+
 }
 
 void AEscapeRoom_Level_1::BeginPlay()
@@ -57,6 +67,13 @@ void AEscapeRoom_Level_1::Tick(float DeltaTime)
 
 bool AEscapeRoom_Level_1::ManageLevel(int32 NewLevel)
 {
+	// Super::ManageLevel(NewLevel);
+	GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Yellow, FString::Printf(TEXT("Manage Level 1")));
+	if(NewLevel > Level)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Yellow, FString::Printf(TEXT("IN IF")));
+		SpawnCompletedLevelHint();
+	}
 	IsActive = Level == NewLevel;
 	SetWarningLight(Level < NewLevel);
 	SetActorTickEnabled(true);

@@ -21,6 +21,9 @@ AEscapeRoom_Level::AEscapeRoom_Level()
 	SpotLight = CreateDefaultSubobject<USpotLightComponent>(TEXT("SpotLight"));
     SpotLight->SetupAttachment(RootComponent);
 
+	// LevelCompletedHintSpawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("Level Completed Hint Spawn Point"));
+	// LevelCompletedHintSpawnPoint->SetupAttachment(RootComponent);
+
 	SpotLight->SetIntensity(10000.0f);
     SpotLight->SetVisibility(true);
 
@@ -30,6 +33,8 @@ AEscapeRoom_Level::AEscapeRoom_Level()
 	SpotLight->SetAttenuationRadius(500.0f);
 	FRotator LightRotation = FRotator(-90.f, 0.f, 0.f); 
 	SpotLight->AddWorldRotation(LightRotation);
+
+	
 
 
 
@@ -98,8 +103,43 @@ void AEscapeRoom_Level::ShowHint_Implementation()
 
 
 
-bool AEscapeRoom_Level::ManageLevel(int32 currentLevel)
+bool AEscapeRoom_Level::ManageLevel(int32 NewLevel)
 {
+	if(NewLevel > Level)
+	{
+		SpawnCompletedLevelHint();
+	}
 	return false;
 }
 
+
+void AEscapeRoom_Level::SpawnCompletedLevelHint()
+{
+	
+	GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Yellow, FString::Printf(TEXT("SpawnCompletedLevelHint")));
+
+	if(IsValid(UVTextCompletedHintClass) && SpawnPoint !=  nullptr)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Yellow, FString::Printf(TEXT("IS VALID")));
+		FVector Location = SpawnPoint->GetComponentLocation();
+		FRotator Rotation = SpawnPoint->GetComponentRotation();
+
+		UVTextCompletedHint = GetWorld()->SpawnActor<AActor>(UVTextCompletedHintClass, Location, Rotation);
+		// UVTextCompletedHint->AttachToActor(this);
+		UVTextCompletedHint->AttachToComponent( RootComponent ,FAttachmentTransformRules::SnapToTargetIncludingScale);
+
+		// Projectile->SetOwner(this);
+	}
+	else {
+		if(!IsValid(UVTextCompletedHintClass))
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, FString::Printf(TEXT("UVTextCompletedHintClass not valid")));
+		}
+		if(SpawnPoint ==  nullptr)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, FString::Printf(TEXT("SpawnPoint not valid")));
+		}
+
+	}	
+
+}
