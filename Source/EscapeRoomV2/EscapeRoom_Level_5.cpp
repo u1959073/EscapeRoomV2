@@ -3,6 +3,7 @@
 
 #include "EscapeRoom_Level_5.h"
 #include "Components/SlateWrapperTypes.h"
+#include "EscapeRoom_CardinalComponent.h"
 
 AEscapeRoom_Level_5::AEscapeRoom_Level_5()
 {
@@ -15,7 +16,9 @@ AEscapeRoom_Level_5::AEscapeRoom_Level_5()
 
 	BaseMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Base Mesh"));
 	BaseMesh->SetupAttachment(Scene);
-    BaseMesh->SetVisibility(ESlateVisibility::Hidden);
+    // BaseMesh->SetVisibility(ESlateVisibility::Hidden);
+
+	CompassComponent = CreateDefaultSubobject<UEscapeRoom_CardinalComponent>(TEXT("Compass Component"));
 
 }
 
@@ -26,9 +29,11 @@ void AEscapeRoom_Level_5::BeginPlay()
 
 }
 
-void AEscapeRoom_Level_1::Tick(float DeltaTime)
+void AEscapeRoom_Level_5::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	
+    BaseMesh->SetVisibility(CompassComponent->IsNorth());
 	
 }
 
@@ -43,7 +48,7 @@ bool AEscapeRoom_Level_5::ManageLevel(int32 NewLevel)
 	IsActive = Level == NewLevel;
 	// SetWarningLight(Level < NewLevel);
 	SetActorTickEnabled(true);
-    BaseMesh->SetVisibility(IsActive);
+    // BaseMesh->SetVisibility(IsActive);
 	SetHints(NewLevel);
 	return IsActive;
 }

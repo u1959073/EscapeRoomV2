@@ -37,5 +37,8 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	USceneComponent* Scene;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	class UEscapeRoom_CardinalComponent* CompassComponent;
+
 
 };

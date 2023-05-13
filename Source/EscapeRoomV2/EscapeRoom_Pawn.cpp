@@ -4,6 +4,8 @@
 #include "EscapeRoom_Pawn.h"
 #include "EscapeRoom_Spawner.h"
 #include "EscapeRoom_InputMotion.h"
+#include "EscapeRoom_CardinalComponent.h"
+
 
 #include "Camera/CameraComponent.h"
 #include "ARTrackable.h"
@@ -24,6 +26,10 @@ AEscapeRoom_Pawn::AEscapeRoom_Pawn()
 
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	Camera->SetupAttachment(RootComponent);
+
+	Compass = CreateDefaultSubobject<UEscapeRoom_CardinalComponent>(TEXT("Compass"));
+	// Compass->SetupAttachment(RootComponent);
+
 
 	SpotFlashlight = CreateDefaultSubobject<USpotLightComponent>(TEXT("SpotFlashlight"));
     SpotFlashlight->SetupAttachment(Camera);
