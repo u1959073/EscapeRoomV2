@@ -30,6 +30,11 @@ public:
 	bool IsEast();
 	bool IsWest();
 
+	UFUNCTION(BlueprintCallable)
+	int GetNorth();
+
+	UFUNCTION(BlueprintCallable)
+	int GetNorthInDegrees();
 
 
 private: 
@@ -38,6 +43,14 @@ private:
 	FVector _rotation;
 	FVector _gravity; 
 	FVector _acceleration;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Variables", meta = (AllowPrivateAccess = "true"))
+	int northAngleLimitUp = 15;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Variables", meta = (AllowPrivateAccess = "true"))
+	int northAngleLimitDown = -15;
+
 	APlayerController* PlayerControllerRef;
-		
+
+
 };

@@ -28,16 +28,8 @@ void UEscapeRoom_CardinalComponent::BeginPlay()
 
 bool UEscapeRoom_CardinalComponent::IsNorth()
 {
-	
-	int Z = (int)(_tilt.Z + 0.5 - (_tilt.Z<0));
-	int Y = (int)(_tilt.Y + 0.5 - (_tilt.Y<0));
-	bool isNorth = (Z - Y) == 0;
-
-	FString ret = isNorth ? "True" : "False";
-	
-	GEngine->AddOnScreenDebugMessage(-1, GWorld->DeltaTimeSeconds, FColor::Purple, FString::Printf(TEXT("tilt: %s"), *ret));
-
-	return ((int)(_tilt.Z + 0.5 - (_tilt.Z<0)) - (int)(_tilt.Y + 0.5 - (_tilt.Y<0))) == 0;
+	int northAngle = GetNorthInDegrees(); 
+	return northAngle > northAngleLimitDown && northAngle < northAngleLimitUp;
 }
 
 bool UEscapeRoom_CardinalComponent::IsSouth()
@@ -55,6 +47,16 @@ bool UEscapeRoom_CardinalComponent::IsWest()
 	return false;	
 }
 
+int UEscapeRoom_CardinalComponent::GetNorth()
+{
+	return (int)(_tilt.Z * 100);	
+}
+
+int UEscapeRoom_CardinalComponent::GetNorthInDegrees()
+{
+	return GetNorth() * -180 / 313; 	
+}
+
 
 // Called every frame
 void UEscapeRoom_CardinalComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -65,12 +67,14 @@ void UEscapeRoom_CardinalComponent::TickComponent(float DeltaTime, ELevelTick Ti
 
 
 	FVector _tiltAux = FVector((int)(_tilt.X + 0.5 - (_tilt.X<0)), (int)(_tilt.Y + 0.5 - (_tilt.Y<0)) , (int)(_tilt.Z + 0.5 - (_tilt.Z<0)));
-	
+
+	FVector _tiltAux2 = FVector((int)(_tilt.X * 100),(int)(_tilt.Y * 100), (int)(_tilt.Z * 100));
+
 	// int _tiltX = (int)(_tilt. + 0.5 - (_tilt));
 
 	
 
-	GEngine->AddOnScreenDebugMessage(-1, GWorld->DeltaTimeSeconds, FColor::Red, FString::Printf(TEXT("tilt: %s"), *((_tiltAux).ToString())));
+	GEngine->AddOnScreenDebugMessage(-1, GWorld->DeltaTimeSeconds, FColor::Red, FString::Printf(TEXT("tilt: %s"), *((_tiltAux2).ToString())));
 
 
 	// ...

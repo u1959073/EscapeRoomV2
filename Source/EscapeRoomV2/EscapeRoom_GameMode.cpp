@@ -11,6 +11,7 @@
 #include "EscapeRoom_InputMotion.h"
 #include "EscapeRoom_LaserEmitter.h"
 #include "EscapeRoom_Level.h"
+#include "EscapeRoom_CardinalComponent.h"
 
 #include "ARTrackable.h"
 #include "ARBlueprintLibrary.h"
@@ -26,6 +27,8 @@ AEscapeRoom_GameMode::AEscapeRoom_GameMode()
     PrimaryActorTick.bStartWithTickEnabled = true;
     PrimaryActorTick.bCanEverTick = true;
 	CurrentLevel = 0;
+
+	CompassComponent = CreateDefaultSubobject<UEscapeRoom_CardinalComponent>(TEXT("Compass Component"));
 
 }
 

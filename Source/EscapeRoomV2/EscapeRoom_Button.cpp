@@ -18,13 +18,14 @@ AEscapeRoom_Button::AEscapeRoom_Button()
 	ButtonMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Button Mesh"));
 	ButtonMesh->SetupAttachment(Scene);
 
+
 	lightOn = false;
 
 
 }
 
  
-void AEscapeRoom_Button::HandleInputTouch(UStaticMeshComponent *t) 
+void AEscapeRoom_Button::HandleInputTouch(USceneComponent *t) 
 {
 	AEscapeRoom_GameMode *GameMode = Cast<AEscapeRoom_GameMode>(UGameplayStatics::GetGameMode(this));
 	if(GameMode != nullptr)
@@ -50,7 +51,7 @@ void AEscapeRoom_Button::HandleInputTouch(UStaticMeshComponent *t)
 		{
 			FString ActorName = Actor->GetActorNameOrLabel();
 			GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Purple, FString::Printf(TEXT("OverlapingActorName: %s"), *ActorName));
-			if(t->ComponentHasTag("pressable") && (t == ButtonMesh))
+			if(t->ComponentHasTag("pressable"))
 			{
 				// AEscapeRoom_GameMode *GameMode = Cast<AEscapeRoom_GameMode>(UGameplayStatics::GetGameMode(this));
 				if(GameMode != nullptr)

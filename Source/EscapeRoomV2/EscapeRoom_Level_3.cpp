@@ -24,14 +24,10 @@ AEscapeRoom_Level_3::AEscapeRoom_Level_3()
 	BaseMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Base Mesh"));
 	BaseMesh->SetupAttachment(Scene);
 
-	MirrorMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mirror Mesh"));
-	MirrorMesh->SetupAttachment(Scene);
 
 	Mirror_1 = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mirror 1"));
 	Mirror_1->SetupAttachment(Scene);
 
-	StaticMirrorMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Static Mirror Mesh"));
-	StaticMirrorMesh->SetupAttachment(Scene);
 
 	LaserEmitterInputMotionComp = CreateDefaultSubobject<UEscapeRoom_InputMotionComponent>(TEXT("Laser Emitter Input Motion Component"));
 	LaserSensorInputMotionComp = CreateDefaultSubobject<UEscapeRoom_InputMotionComponent>(TEXT("Laser Sensor Input Motion Component"));
@@ -74,9 +70,6 @@ void AEscapeRoom_Level_3::BeginPlay()
 	}
 
 
-
-	LaserSensor = GetWorld()->SpawnActor<AEscapeRoom_LaserSensor>(LaserSensorClass);
-
 }
 
 // Called every frame
@@ -92,7 +85,7 @@ void AEscapeRoom_Level_3::Tick(float DeltaTime)
 		if(GameMode != nullptr)
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Yellow, FString::Printf(TEXT("HandleInputTouch")));
-			GameMode->ManageGameLevel(Level++);
+			GameMode->ManageGameLevel(5);
 		}
 		LaserEmitterInputMotionComp->Disable();
 		LaserSensorInputMotionComp->Disable();

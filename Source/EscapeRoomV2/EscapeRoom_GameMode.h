@@ -29,6 +29,9 @@ public:
 	void ToggleGlobalLight();
 
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+	void ToggleCompass();
+
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
 	void CloseInputCodeWitget();
 
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
@@ -68,6 +71,8 @@ private:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Variables",  meta = (AllowPrivateAccess = "true"))
 	int32 CurrentLevel;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	class UEscapeRoom_CardinalComponent* CompassComponent;
 
 	TArray<class UARTrackedImage*> AuxTrackedImages;
 	// APlayerController* PlayerControllerRef;	

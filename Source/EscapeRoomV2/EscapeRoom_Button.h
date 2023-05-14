@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Components/BoxComponent.h"
 #include "EscapeRoom_Button.generated.h"
 
 UCLASS()
@@ -24,7 +25,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintCallable, Category = "Events")
-	void HandleInputTouch(UStaticMeshComponent* ButtonMesh);
+	void HandleInputTouch(USceneComponent* ButtonMesh);
 
 private:
 	// void ButtonPressed(ETouchIndex::Type FingerIndex, UPrimitiveComponent* TouchedComponent);
@@ -32,16 +33,18 @@ private:
 
 private:
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	UStaticMeshComponent* ButtonMesh;
 
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	USceneComponent* Scene;
 
 	UPROPERTY(EditDefaultsOnly, Category = "BP_Class")
 	TSubclassOf<class AActor> ButtonClass;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Variables", meta = (AllowPrivateAccess = "true"))
 	bool lightOn = false;
 
 
